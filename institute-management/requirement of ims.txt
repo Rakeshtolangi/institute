@@ -1,0 +1,44 @@
+features:
+1. manage students
+2. manage Batches
+3. manage Faculties
+4. Manage Cources.
+5. Masters/ teachers.
+6. expences
+settings
+Reports
+    a. Income Reports
+    b. Expenses Reports
+    c. Student Fee Reports
+
+
+
+
+
+students requirements
+Name 
+Father Name
+date of birth
+email
+mobile no.
+gender
+    male
+    female
+admission info
+        courses
+            select course
+                 course 1
+                  course 2
+                  course 3
+        Batches 
+            select Batches  
+                    batch 1
+                    batch 2
+                    batch 3
+        course Fee
+        student agreed fee.
+
+
+
+        
+

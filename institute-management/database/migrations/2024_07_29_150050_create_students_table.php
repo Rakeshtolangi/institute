@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+    /**php
      * Run the migrations.
      */
     public function up(): void
@@ -14,7 +14,14 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('class_id');
+            $table->string('father_name');
+            $table->date('dob');
+            $table->string('email')->unique();
+            $table->string('mobile');
+            $table->enum('gender', ['male', 'female']);
+            $table->integer('course_id');
+            $table->decimal('course_fee', 8, 2);
+            $table->decimal('student_fee', 8, 2);
             $table->timestamps();
         });
     }

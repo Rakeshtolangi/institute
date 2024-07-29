@@ -27,17 +27,22 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            //adding this to check if data is being received correctly
+    
             'name' => 'required|string|max:255',
             'father_name' => 'required|string|max:255',
             'dob' => 'required|date',
             'email' => 'required|email|max:255',
             'mobile' => 'required|string|max:15',
             'gender' => 'required|in:male,female',
-            'course_id' => 'required|exists:courses,id',
-            'course_fee' => 'required|numeric',
-            'student_fee' => 'required|numeric',
-            'class_id' => 'required|exists:class_models,id',
+            // 'course_id' => 'required|exists:courses,id',
+            'course_id' => 'required',
+
+            'course_fee' => 'required',
+            'student_fee' => 'required',
+            // 'class_id' => 'required|exists:class_models,id',
         ]);
+        // dd($validated);
 
         Student::create($validated);
 

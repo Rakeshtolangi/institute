@@ -37,18 +37,21 @@
 <div class="form-group">
     <label for="course_id">Course</label>
     <select name="course_id" id="course_id" class="form-control">
-        @foreach ($courses as $course)
+        <!-- @foreach ($courses as $course)
         <option value="{{ $course->id }}"
             {{ (old('course_id') ?? $student->course_id ?? '') == $course->id ? 'selected' : '' }}>
             {{ $course->name }}
         </option>
-        @endforeach
+        @endforeach -->
+        <option value="1">
+            1
+        </option>
     </select>
 </div>
 
-<div class="form-group">
+<!-- <div class="form-group">
     <label for="batch_id">Batch</label>
-</div>
+</div> -->
 
 <div class="form-group">
     <label for="course_fee">Course Fee</label>

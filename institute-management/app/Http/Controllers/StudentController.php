@@ -14,14 +14,14 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::with('classModel')->get();
-        return view('students.index', compact('students'));
+        return view('backend.students.index', compact('students'));
     }
 
     public function create()
     {
         $classes = ClassModel::all();
         $courses = Course::all();
-        return view('students.create', compact('classes', 'courses'));
+        return view('backend.students.create', compact('classes', 'courses'));
     }
 
     public function store(Request $request)
@@ -58,24 +58,26 @@ class StudentController extends Controller
     {
         $classes = ClassModel::all();
         $courses = Course::all();
-        return view('students.edit', compact('student', 'classes', 'courses'));
+        return view('backend.students.edit', compact('student', 'classes', 'courses'));
     }
 
     public function update(Request $request, Student $student)
     {
         $validated = $request->validate([
+            //adding this to check if data is being received correctly
+    
             'name' => 'required|string|max:255',
             'father_name' => 'required|string|max:255',
             'dob' => 'required|date',
             'email' => 'required|email|max:255',
             'mobile' => 'required|string|max:15',
             'gender' => 'required|in:male,female',
-            'course_id' => 'required|exists:courses,id',
-            'course_fee' => 'required|numeric',
-            'student_fee' => 'required|numeric',
-            'class_id' => 'required|exists:class_models,id',
+            'course_id' => 'required',
+            'course_fee' => 'required',
+            'student_fee' => 'required',
         ]);
-
+       
+        
         $student->update($validated);
 
         return redirect()->route('students.index')->with('success', 'Student updated successfully!');

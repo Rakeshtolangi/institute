@@ -49,11 +49,15 @@ class StudentController extends Controller
         return redirect()->route('students.index')->with('success', 'Student added successfully!');
     }
 
+
+    
     public function show(Student $student)
     {
         return view('students.show', compact('student'));
     }
 
+
+    
     public function edit(Student $student)
     {
         $classes = ClassModel::all();
@@ -92,5 +96,11 @@ class StudentController extends Controller
     public function getMarks()
     {
         // Implement this method if needed
+    }
+
+    // enquiry form student model
+    public function showInquiryForm()
+    {
+        return view('backend.students.inquiry');
     }
 }

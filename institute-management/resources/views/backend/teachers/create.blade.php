@@ -6,9 +6,9 @@
 
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Add Student</h3>
+            <h3 class="fw-bold mb-3">Add Teacher</h3>
             <div class="float-right">
-                <a href="{{ route('students.index') }}" class="btn btn-primary">List Students</a>
+                <a href="{{ route('teachers.index') }}" class="btn btn-primary">List Teacher</a>
 
             </div>
             @if ($message = Session::get('success'))
@@ -21,12 +21,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Student Details</h4>
+                        <h4 class="card-title">Teacher Details</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('students.store') }}" method="POST">
+                        <form action="{{ route('teachers.store') }}" method="POST">
                             @csrf
-                            @include('backend.students._form')
+                            @include('backend.teachers._form')
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>

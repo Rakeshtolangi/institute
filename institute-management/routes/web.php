@@ -25,4 +25,8 @@ Route::resource('shifts', ShiftController::class);
 Route::get('students/getmarks', [StudentController::class,'getMarks']);
 Auth::routes();
 
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/dashboard/students/inquiry', [App\Http\Controllers\StudentController::class, 'showInquiryForm'])
+        ->name('students.inquiry');

@@ -76,8 +76,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="">
-                                <i class="fas fa-layer-group"></i>
+                            <a data-bs-toggle="collapse" href="{{route('students.inquiry')}}">
+                                <i class=" fas fa-layer-group"></i>
                                 <p>Enquires</p>
                             </a>
 
@@ -96,7 +96,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="icon-menu.html">
+                                        <a href="{{route('students.create')}}">
                                             <span class="sub-item">Add Student</span>
                                         </a>
                                     </li>

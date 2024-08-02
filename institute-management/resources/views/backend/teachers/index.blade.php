@@ -56,11 +56,11 @@
                                                     <i class="fa fa-ellipsis-v"></i> </button>
                                                 <ul class="dropdown-menu" role="menu" style="">
                                                     <li>
-                                                        <a href="{{ route('students.show', $student->id) }}"
+                                                        <a href="{{ route('teachers.show', $teacher->id) }}"
                                                             class="dropdown-item">View</a>
-                                                        <a href="{{ route('students.edit', $student->id) }}"
+                                                        <a href="{{ route('teachers.edit', $teacher->id) }}"
                                                             class="dropdown-item">Edit</a>
-                                                        <form action="{{ route('students.destroy', $student->id) }}"
+                                                        <form action="{{ route('teachers.destroy', $teacher->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')

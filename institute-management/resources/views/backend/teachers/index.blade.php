@@ -44,10 +44,10 @@
                                         <td>{{ $teacher->email }}</td>
                                         <td>{{ $teacher->mobile }}</td>
                                         <td>{{ $teacher->course }}</td>
-                                        <!-- <td>{{ $student->batch }}</td>
-                                        <td>{{ $student->gender }}</td>
-                                        <td>{{ $student->course_fee }}</td>
-                                        <td>{{ $student->student_fee }}</td> -->
+                                        <!-- <td>{{ $teacher->batch }}</td>
+                                        <td>{{ $teacher->gender }}</td>
+                                        <td>{{ $teacher->course_fee }}</td>
+                                        <td>{{ $teacher->student_fee }}</td> -->
                                         <td>
                                             <div class="btn-group dropstart">
                                                 <button type="button" class="btn  dropdown-toggle"

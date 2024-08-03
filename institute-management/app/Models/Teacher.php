@@ -13,7 +13,7 @@ class Teacher extends Model
         'name',
         'email',
         'phone',
-        'subject_id',
+    //    'subject_id',  //for now doesn't required.
         // Add other attributes if necessary
     ];
 

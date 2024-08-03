@@ -33,7 +33,7 @@ class TeacherController extends Controller
 
         'name'=> 'required',
         'email'=>'required',
-        'phone'=>'required',
+        'mobile'=>'required', //your request is mobile not phone.
         
         // 'subject_id',
 

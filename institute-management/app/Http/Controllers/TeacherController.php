@@ -40,6 +40,7 @@ class TeacherController extends Controller
         
        ]);
 
+        //now check the data.
        dd($validated);
 
        Teacher::create($validated);

@@ -6,6 +6,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ShiftController;
+use App\Http\Controllers\BatchController;
 
 
 // Route::get('/', function () {
@@ -19,14 +20,15 @@ Route::resource('teachers', TeacherController::class);
 Route::resource('courses', CourseController::class);
 Route::resource('classes', ClassController::class);
 Route::resource('shifts', ShiftController::class);
+Route::resource('batches', BatchController::class);
 
 // Make a custom route for students
 
-Route::get('students/getmarks', [StudentController::class,'getMarks']);
 Auth::routes();
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/dashboard/students/inquiry', [App\Http\Controllers\StudentController::class, 'showInquiryForm'])
-        ->name('students.inquiry');
+// Route::post('enquiry', [StudentController::class, 'showEnquiryForm'])->name('students.enquiry');
+// Route::post('enquiry', [StudentController::class, 'submitEnquiry'])->name('students.submitEnquiry');
+// Route::get('enquiries', [StudentController::class, 'listEnquiries'])->name('students.listEnquiries');

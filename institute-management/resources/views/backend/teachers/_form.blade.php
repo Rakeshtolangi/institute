@@ -11,12 +11,10 @@
 
 </div>
 
-
-
 <div class="row g-3">
     <div class="col-md-6">
         <label for=" mobile">Mobile Number</label>
-        <input type="text" name="mobile" id="mobile" class="form-control" value="">
+        <input type="text" name="phone" id="phone" class="form-control" value="">
     </div>
 
 </div>

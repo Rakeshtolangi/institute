@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('batch_id');
+            $table->bigInteger('course_id');
             $table->string('name');
             $table->string('father_name');
             $table->date('dob');
             $table->string('email')->unique();
             $table->string('mobile');
             $table->enum('gender', ['male', 'female']);
-            $table->integer('course_id');
             $table->decimal('course_fee', 8, 2);
             $table->decimal('student_fee', 8, 2);
             $table->timestamps();

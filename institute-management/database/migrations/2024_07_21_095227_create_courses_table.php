@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->bigInteger('category_id');
+            $table->bigInteger('batch_id');
+            $table->string('image');
+            $table->string('duration');
+            $table->string('type');
+            $table->double('fee');
+            $table->tinyInteger('status');
+            $table->string('skill_level')->nullable();
+            $table->text('description')->nullable();
+            $table->text('outcome')->nullable();
             $table->timestamps();
         });
     }

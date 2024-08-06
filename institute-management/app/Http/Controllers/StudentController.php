@@ -26,6 +26,7 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validated = $request->validate([
             //adding this to check if data is being received correctly
     
@@ -35,12 +36,11 @@ class StudentController extends Controller
             'email' => 'required|email|max:255',
             'mobile' => 'required|string|max:15',
             'gender' => 'required|in:male,female',
-            // 'course_id' => 'required|exists:courses,id',
-            'course_id' => 'required',
+             'course_id' => 'required',
+            'batch_id' => 'required',
 
             'course_fee' => 'required',
             'student_fee' => 'required',
-            // 'class_id' => 'required|exists:class_models,id',
         ]);
         // dd($validated);
 
@@ -53,6 +53,7 @@ class StudentController extends Controller
     
     public function show(Student $student)
     {
+        
         return view('students.show', compact('student'));
     }
 
@@ -60,6 +61,7 @@ class StudentController extends Controller
     
     public function edit(Student $student)
     {
+        
         $classes = ClassModel::all();
         $courses = Course::all();
         return view('backend.students.edit', compact('student', 'classes', 'courses'));
@@ -77,6 +79,7 @@ class StudentController extends Controller
             'mobile' => 'required|string|max:15',
             'gender' => 'required|in:male,female',
             'course_id' => 'required',
+            'batch_id' => 'required',
             'course_fee' => 'required',
             'student_fee' => 'required',
         ]);
@@ -93,14 +96,39 @@ class StudentController extends Controller
         return redirect()->route('students.index')->with('success', 'Student deleted successfully!');
     }
 
-    public function getMarks()
-    {
-        // Implement this method if needed
-    }
+  
 
-    // enquiry form student model
-    public function showInquiryForm()
-    {
-        return view('backend.students.inquiry');
-    }
+
+    
+// enquiry form student model
+    
+// public function showEnquiryForm()
+// {
+//     $courses = Course::all();
+//     return view('backend.students.enquiry', compact('courses'));
+// }
+
+// public function submitEnquiry(Request $request)
+// {
+//     $validatedData = $request->validate([
+//         'name' => 'required',
+//         'father_name' => 'require',
+//         'dob' => 'required|date',
+//         'email' => 'required',
+//         'mobile' => 'required',
+//         'preferred_time' => 'required',
+//         'course_id' => 'required',
+//     ]);
+
+//     // Create a new enquiry or student record
+//     Student::create($validatedData);
+
+//     return redirect()->route('students.enquiry')->with('success', 'Enquiry submitted successfully!');
+// }
+
+// public function listEnquiries()
+// {
+//     $enquiries = Student::with('course')->get();
+//     return view('backend.students.enquiries', compact('enquiries'));
+// }
 }

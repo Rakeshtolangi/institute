@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shifts', function (Blueprint $table) {
+        Schema::create('batches', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('batch_id');
-            $table->bigInteger('course_id');
-            $table->bigInteger('faculty_id');
             $table->string('title');
-            $table->string('start_time');
-            $table->string('end_time');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('description');
+            
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shifts');
+        Schema::dropIfExists('batches');
     }
 };

@@ -11,13 +11,7 @@
                 <a href="{{ route('students.create') }}" class="btn btn-primary">Add Student</a>
 
             </div>
-
         </div>
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-        @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

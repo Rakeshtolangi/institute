@@ -21,6 +21,7 @@ class Student extends Model
         'mobile',
         'gender',
         'course_id',
+        'batch_id',
         'course_fee',
         'student_fee',
         // 'class_id'

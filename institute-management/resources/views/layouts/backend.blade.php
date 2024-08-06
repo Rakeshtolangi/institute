@@ -44,7 +44,7 @@
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
-                    <a href="index.html" class="logo">
+                    <a href="{{url('/')}}" class="logo">
                         <!-- <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
                             height="20" /> -->
                         <p class="text-white">IMS</p>
@@ -67,8 +67,7 @@
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
                         <li class="nav-item active">
-                            <a data-bs-toggle="collapse" href="{{route('home')}}" class="collapsed"
-                                aria-expanded="false">
+                            <a href="{{route('home')}}" class="collapsed" aria-expanded="false">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -76,7 +75,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="{{route('students.inquiry')}}">
+                            <a href="{{url('enquiries')}}">
                                 <i class=" fas fa-layer-group"></i>
                                 <p>Enquires</p>
                             </a>
@@ -112,13 +111,13 @@
                             <div class="collapse" id="forms">
                                 <ul class="nav nav-collapse">
                                     <li>
-                                        <a href="forms/forms.html">
+                                        <a href="{{route('batches.index')}}">
                                             <span class="sub-item">List Batches</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="forms/forms.html">
-                                            <span class="sub-item">Add Batch</span>
+                                        <a href="{{route('shifts.index')}}">
+                                            <span class="sub-item">List Shifts</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -133,12 +132,12 @@
                             <div class="collapse" id="tables">
                                 <ul class="nav nav-collapse">
                                     <li>
-                                        <a href="tables/tables.html">
+                                        <a href="{{route('courses.index')}}">
                                             <span class="sub-item">List Courses</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="tables/datatables.html">
+                                        <a href="{{route('courses.store')}}">
                                             <span class="sub-item">Add Course</span>
                                         </a>
                                     </li>

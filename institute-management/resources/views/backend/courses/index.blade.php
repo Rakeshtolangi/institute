@@ -6,23 +6,17 @@
 
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Manage Students</h3>
+            <h3 class="fw-bold mb-3">Manage Teacher</h3>
             <div class="float-right">
-                <a href="{{ route('students.create') }}" class="btn btn-primary">Add Student</a>
+                <a href="{{ route('teachers.create') }}" class="btn btn-primary">Add Teacher</a>
 
             </div>
-
         </div>
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-        @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Student Lists</h4>
+                        <h4 class="card-title">Teachers Lists</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -35,25 +29,25 @@
                                         <th>Email</th>
                                         <th>Mobile no.</th>
                                         <th>Course</th>
-                                        <th>Batch</th>
+                                        <!-- <th>Batch</th>
                                         <th>Gender</th>
                                         <th>Course Fee</th>
-                                        <th>Student Fee</th>
+                                        <th>Student Fee</th> -->
                                         <th class="no-sorting">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($students as $key => $student)
+                                    @foreach ($teachers as $key => $teacher)
                                     <tr>
                                         <td>{{ $key  + 1 }}</td>
-                                        <td>{{ $student->name }}</td>
-                                        <td>{{ $student->email }}</td>
-                                        <td>{{ $student->mobile }}</td>
-                                        <td>{{ $student->course }}</td>
-                                        <td>{{ $student->batch }}</td>
+                                        <td>{{ $teacher->name }}</td>
+                                        <td>{{ $teacher->email }}</td>
+                                        <td>{{ $teacher->mobile }}</td>
+                                        <td>{{ $teacher->course }}</td>
+                                        <!-- <td>{{ $student->batch }}</td>
                                         <td>{{ $student->gender }}</td>
                                         <td>{{ $student->course_fee }}</td>
-                                        <td>{{ $student->student_fee }}</td>
+                                        <td>{{ $student->student_fee }}</td> -->
                                         <td>
                                             <div class="btn-group dropstart">
                                                 <button type="button" class="btn  dropdown-toggle"
@@ -62,11 +56,11 @@
                                                     <i class="fa fa-ellipsis-v"></i> </button>
                                                 <ul class="dropdown-menu" role="menu" style="">
                                                     <li>
-                                                        <a href="{{ route('students.show', $student->id) }}"
+                                                        <a href="{{ route('teachers.show', $teacher->id) }}"
                                                             class="dropdown-item">View</a>
-                                                        <a href="{{ route('students.edit', $student->id) }}"
+                                                        <a href="{{ route('teachers.edit', $teacher->id) }}"
                                                             class="dropdown-item">Edit</a>
-                                                        <form action="{{ route('students.destroy', $student->id) }}"
+                                                        <form action="{{ route('teachers.destroy', $teacher->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')

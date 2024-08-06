@@ -13,7 +13,11 @@ class Teacher extends Model
         'name',
         'email',
         'phone',
+<<<<<<< Updated upstream
     //    'subject_id',  //for now doesn't required.
+=======
+        // 'subject_id',
+>>>>>>> Stashed changes
         // Add other attributes if necessary
     ];
 

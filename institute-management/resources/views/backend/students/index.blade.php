@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
 
-
     <div class="page-inner">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Manage Students</h3>

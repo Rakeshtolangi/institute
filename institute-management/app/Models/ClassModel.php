@@ -38,10 +38,11 @@ class ClassModel extends Model
     /**
      * Get the teacher for this class.
      */
-    public function teacher()
-    {
-        return $this->belongsTo(Teacher::class, 'teacher_id');
-    }
+// Define the relationship with Teacher
+public function teachers()
+{
+    return $this->belongsToMany(Teacher::class, 'teacher_class', 'class_id', 'teacher_id');
+}
 
     /**
      * Get the shift for this class.
@@ -49,5 +50,10 @@ class ClassModel extends Model
     public function shift()
     {
         return $this->belongsTo(Shift::class, 'shift_id');
+    }
+
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class);
     }
 }

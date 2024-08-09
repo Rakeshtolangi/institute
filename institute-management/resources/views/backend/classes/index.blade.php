@@ -1,12 +1,12 @@
-<!-- resources/views/courses/index.blade.php -->
+<!-- resources/views/classes/index.blade.php -->
 @extends('layouts.backend')
 
 @section('content')
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Courses</h3>
-            <a href="{{ route('courses.create') }}" class="btn btn-primary">Create Course</a>
+            <h3 class="fw-bold mb-3">Classes</h3>
+            <a href="{{ route('classes.create') }}" class="btn btn-primary">Create Class</a>
         </div>
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -20,29 +20,27 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Category</th>
-                                    <th>Duration</th>
-                                    <th>Type</th>
-                                    <th>Fee</th>
-                                    <th>Status</th>
+                                    <th>Name</th>
+                                    <th>Course</th>
+                                    <th>Teacher</th>
+                                    <th>Shift</th>
+                                    <th>Batch</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($courses as $course)
+                                @foreach ($classes as $class)
                                 <tr>
-                                    <td>{{ $course->title }}</td>
-                                    <td>{{ $course->category->name }}</td>
-                                    <td>{{ $course->duration }}</td>
-                                    <td>{{ $course->type }}</td>
-                                    <td>{{ $course->fee }}</td>
-                                    <td>{{ $course->status ? 'Active' : 'Inactive' }}</td>
+                                    <td>{{ $class->name }}</td>
+                                    <td>{{ $class->course->title }}</td>
+                                    <td>{{ $class->teacher->name }}</td>
+                                    <td>{{ $class->shift->name }}</td>
+                                    <td>{{ $class->batch->title }}</td>
                                     <td>
-                                        <a href="{{ route('courses.show', $course->id) }}" class="btn btn-info">View</a>
-                                        <a href="{{ route('courses.edit', $course->id) }}"
+                                        <a href="{{ route('classes.show', $class->id) }}" class="btn btn-info">View</a>
+                                        <a href="{{ route('classes.edit', $class->id) }}"
                                             class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('courses.destroy', $course->id) }}" method="POST"
+                                        <form action="{{ route('classes.destroy', $class->id) }}" method="POST"
                                             style="display:inline;">
                                             @csrf
                                             @method('DELETE')

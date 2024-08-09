@@ -19,7 +19,7 @@
                         <h4 class="card-title">Student Details</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('students.submitEnquiry') }}" method="POST">
+                        <form action="{{ route('enquiries.store') }}" method="POST">
                             @csrf
                             <div class="row g-3">
                                 <div class="col-md-6">
@@ -67,5 +67,22 @@
                                 <div class="col-md-6">
                                     <label for="course_id">Select Course</label>
                                     <select name="course_id" id="course_id" class="form-control">
-                                        @foreach ($courses as $course)
-                                        <option value="{{ $course->id }}" {{ old('course_id') == $course-
+                                        <!-- @foreach ($courses as $course)
+                                        <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                        @endforeach -->
+                                        <option value="1">1</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

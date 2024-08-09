@@ -27,15 +27,14 @@ class TeacherController extends Controller
 
     public function store(Request $request)
     {
-      
+        
        $validated = $request->validate([
         // adding if data is being recieved correctly.
 
         'name'=> 'required',
         'email'=>'required||email',
         'phone'=>'required',
-        'email'=>'required',
-        'mobile'=>'required', //your request is mobile not phone.
+        // 'email'=>'required', //your request is mobile not phone.
         
         // 'subject_id',
 
@@ -44,7 +43,7 @@ class TeacherController extends Controller
 
     //    dd($request->all());
         //now check the data.
-       dd($validated);
+       
 
        Teacher::create($validated);
 
@@ -70,7 +69,6 @@ class TeacherController extends Controller
 
     public function update(Request $request, Teacher $teacher)
     {
-
          // Check the request data
     // dd($request->all());
 

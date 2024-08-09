@@ -10,6 +10,8 @@
                 <a href="{{ route('students.index') }}" class="btn btn-primary">List Students</a>
 
             </div>
+
+
             @if ($message = Session::get('success'))
             <div class="alert alert-success">
                 <p>{{ $message }}</p>

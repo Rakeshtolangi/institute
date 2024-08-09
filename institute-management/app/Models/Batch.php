@@ -16,4 +16,10 @@ class Batch extends Model
        'description' 
         // Add other attributes if necessary
     ];
+
+    // Relationships
+    public function classes()
+    {
+        return $this->hasMany(ClassModel::class);
+    }
 }

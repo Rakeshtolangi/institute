@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('batch_id');
             $table->bigInteger('course_id');
             $table->bigInteger('faculty_id');
-            $table->string('title');
+            $table->string('name');
             $table->string('start_time');
             $table->string('end_time');
             $table->timestamps();

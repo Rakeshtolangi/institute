@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Enquiry extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'father_name',
+        'dob',
+        'email',
+        'mobile',
+        'preferred_time',
+        'course_id',
+    ];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\BatchController;
+use App\Http\Controllers\EnquiryController;
 
 
 // Route::get('/', function () {
@@ -21,6 +22,7 @@ Route::resource('courses', CourseController::class);
 Route::resource('classes', ClassController::class);
 Route::resource('shifts', ShiftController::class);
 Route::resource('batches', BatchController::class);
+Route::resource('enquiries', EnquiryController::class);
 
 // Make a custom route for students
 
@@ -29,6 +31,6 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::post('enquiry', [StudentController::class, 'showEnquiryForm'])->name('students.enquiry');
-// Route::post('enquiry', [StudentController::class, 'submitEnquiry'])->name('students.submitEnquiry');
-// Route::get('enquiries', [StudentController::class, 'listEnquiries'])->name('students.listEnquiries');
+// Route::post('enquiry', [StudentController::class, 'showEnquiryForm'])->name('enquiries.enquiry');
+// Route::post('enquiry', [StudentController::class, 'submitEnquiry'])->name('enquiries.submitEnquiry');
+// Route::get('enquiries', [StudentController::class, 'listEnquiries'])->name('enquiries.listEnquiries');

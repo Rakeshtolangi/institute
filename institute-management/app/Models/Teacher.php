@@ -12,28 +12,13 @@ class Teacher extends Model
     protected $fillable = [
         'name',
         'email',
+        'subject',
         'phone',
-<<<<<<< Updated upstream
-    //    'subject_id',  //for now doesn't required.
-=======
-        // 'subject_id',
->>>>>>> Stashed changes
-        // Add other attributes if necessary
     ];
 
-    /**
-     * Get the subject that the teacher teaches.
-     */
-    public function subject()
+    // Define the relationship with ClassModel
+    public function ClassModel()
     {
-        return $this->belongsTo(Subject::class, 'subject_id');
-    }
-
-    /**
-     * Get the classes that the teacher teaches.
-     */
-    public function classes()
-    {
-        return $this->hasMany(ClassModel::class, 'teacher_id');
+        return $this->hasMany(ClassModel::class, 'teacher_id','shift_id','batch_id','course_id');
     }
 }

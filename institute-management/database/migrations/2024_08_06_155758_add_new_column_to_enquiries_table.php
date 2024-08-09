@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('enquiries', function (Blueprint $table) {
-            $table->id();
+        Schema::table('enquiries', function (Blueprint $table) {
             $table->string('name');
             $table->string('father_name');
             $table->date('dob');
             $table->string('email');
             $table->string('mobile');
             $table->string('preferred_time');
-            $table->bigInteger('course_id');
-            
-            $table->timestamps();
+            $table->foreignId('course_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -30,6 +27,15 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('enquiries');
+        Schema::table('enquiries', function (Blueprint $table) {
+            $table->dropColumn('name');
+            $table->dropColumn('father_name');
+            $table->dropColumn('dob');
+            $table->dropColumn('email');
+            $table->dropColumn('mobile');
+            $table->dropColumn('preferred_time');
+            $table->dropForeign(['course_id']);
+            $table->dropColumn('course_id');
+        });
     }
 };

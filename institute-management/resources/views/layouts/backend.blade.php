@@ -38,6 +38,7 @@
 </head>
 
 <body>
+
     <div class="wrapper">
         <!-- Sidebar -->
         <div class="sidebar" data-background-color="dark">
@@ -75,12 +76,35 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{url('enquiries')}}">
+                            <!-- <a href="{{url('enquiries')}}">
                                 <i class=" fas fa-layer-group"></i>
                                 <p>Enquires</p>
-                            </a>
-
+                            </a> -->
                         </li>
+
+                        <li class="nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarLayouts">
+                                <i class="fas fa-th-list"></i>
+                                <p>Manage Enquires</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="sidebarLayouts">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="{{route('enquiries.index')}}">
+                                            <span class="sub-item">List Enquires</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('enquiries.create')}}">
+                                            <span class="sub-item">Add Enquires</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarLayouts">
                                 <i class="fas fa-th-list"></i>

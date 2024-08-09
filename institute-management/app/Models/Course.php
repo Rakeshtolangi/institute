@@ -30,4 +30,19 @@ class Course extends Model
     {
         return $this->hasMany(ClassModel::class, 'course_id');
     }
+
+    public function enquiries()
+    {
+        return $this->hasMany(Enquiry::class);
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
+    
+    public function batches()
+    {
+        return $this->hasMany(Batch::class);
+    }
 }

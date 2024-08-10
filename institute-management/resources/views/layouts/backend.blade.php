@@ -83,12 +83,12 @@
                         </li>
 
                         <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarLayouts">
+                            <a data-bs-toggle="collapse" href="#sidebarLayoutsEnquiries">
                                 <i class="fas fa-th-list"></i>
                                 <p>Manage Enquires</p>
                                 <span class="caret"></span>
                             </a>
-                            <div class="collapse" id="sidebarLayouts">
+                            <div class="collapse" id="sidebarLayoutsEnquiries">
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="{{route('enquiries.index')}}">

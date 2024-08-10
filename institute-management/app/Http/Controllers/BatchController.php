@@ -32,15 +32,16 @@ class BatchController extends Controller
      */
     public function store(Request $request)
     {
-        request->validate([
-            'name' => 'required|string|max:255',
+       
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
         ]);
+        // dd($validated) ->all();
+        Batch::create($validated);
 
-        Batch::create($request->all());
-
-        return redirect()->route('backend.batches.index')->with('success', 'Batch created successfully.');
+        return redirect()->route('batches.index')->with('success', 'Batch created successfully.');
     }
 
     /**
@@ -66,9 +67,9 @@ class BatchController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
         ]);

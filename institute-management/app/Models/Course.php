@@ -26,6 +26,12 @@ class Course extends Model
     /**
      * Get the classes that are part of this course.
      */
+
+     public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+    
     public function classes()
     {
         return $this->hasMany(ClassModel::class, 'course_id');

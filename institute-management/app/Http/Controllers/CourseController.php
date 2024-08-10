@@ -4,78 +4,120 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
-use App\Models\Student;
-use App\Models\ClassModel;
+use App\Models\Category;
 
 class CourseController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $courses = Course::all();
+        // Fetch all courses with their associated categories
+        $courses = Course::with('category')->get();
         return view('backend.courses.index', compact('courses'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('backend.courses.create');
+        // Fetch all categories to populate the dropdown
+        $categories = Category::all();
+        return view('backend.courses.create', compact('categories'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $request->validate([
+        // Validate the request
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'image' => 'nullable|image',
-            'duration' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
+            'category_id' => 'required|integer|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'duration' => 'required|string|max:100',
+            'type' => 'required|string|max:50',
             'fee' => 'required|numeric',
             'status' => 'required|boolean',
-            'skill_level' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'outcome' => 'nullable|string',
+            'skill_level' => 'required|string|max:100',
+            'description' => 'required|string',
+            'outcome' => 'required|string',
         ]);
 
-        Course::create($request->all());
+        // Handle file upload if an image is provided
+        if ($request->hasFile('image')) {
+            $fileName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('uploads/courses'), $fileName);
+            $validated['image'] = 'uploads/courses/' . $fileName;
+        }
+
+        // Create a new course
+        Course::create($validated);
 
         return redirect()->route('courses.index')->with('success', 'Course created successfully.');
     }
 
-    public function show($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(Course $course)
     {
-        $course = Course::findOrFail($id);
+        // Return the view with the specific course
         return view('backend.courses.show', compact('course'));
     }
 
-    public function edit($id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Course $course)
     {
-        $course = Course::findOrFail($id);
-        return view('backend.courses.edit', compact('course'));
+        // Fetch all categories to populate the dropdown
+        $categories = Category::all();
+        return view('backend.courses.edit', compact('course', 'categories'));
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Course $course)
     {
-        $request->validate([
+        // Validate the request
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'image' => 'nullable|image',
-            'duration' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
+            'category_id' => 'required|integer|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'duration' => 'required|string|max:100',
+            'type' => 'required|string|max:50',
             'fee' => 'required|numeric',
             'status' => 'required|boolean',
-            'skill_level' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'outcome' => 'nullable|string',
+            'skill_level' => 'required|string|max:100',
+            'description' => 'required|string',
+            'outcome' => 'required|string',
         ]);
 
-        $course = Course::findOrFail($id);
-        $course->update($request->all());
+        // Handle file upload if an image is provided
+        if ($request->hasFile('image')) {
+            $fileName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('uploads/courses'), $fileName);
+            $validated['image'] = 'uploads/courses/' . $fileName;
+        }
+
+        // Update the course
+        $course->update($validated);
 
         return redirect()->route('courses.index')->with('success', 'Course updated successfully.');
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Course $course)
     {
-        Course::destroy($id);
+        // Delete the course
+        $course->delete();
         return redirect()->route('courses.index')->with('success', 'Course deleted successfully.');
     }
 }

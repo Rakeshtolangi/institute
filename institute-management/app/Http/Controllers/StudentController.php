@@ -15,6 +15,11 @@ class StudentController extends Controller
     {
         $students = Student::with('classModel')->get();
         return view('backend.students.index', compact('students'));
+
+        
+// count total number of students
+        $totalStudents = Student::count();
+        return view('dashboard', compact('totalStudents'));
     }
 
     public function create()
@@ -41,7 +46,7 @@ class StudentController extends Controller
 
             'course_fee' => 'required',
             'student_fee' => 'required',
-        ]);
+        ]); 
         // dd($validated);
 
         Student::create($validated);
@@ -96,7 +101,6 @@ class StudentController extends Controller
     }
 
   
-
 
     
 // enquiry form student model

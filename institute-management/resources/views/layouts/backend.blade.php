@@ -107,7 +107,7 @@
 
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarLayouts">
-                                <i class="fas fa-th-list"></i>
+                                <i class="fas fa-users"></i>
                                 <p>Manage Students</p>
                                 <span class="caret"></span>
                             </a>
@@ -161,7 +161,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{route('courses.store')}}">
+                                        <a href="{{route('courses.create')}}">
                                             <span class="sub-item">Add Course</span>
                                         </a>
                                     </li>
@@ -170,20 +170,20 @@
                         </li>
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#maps">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <p>Faculties</p>
+                                <i class="fas fa-user"></i>
+                                <p>Teachers</p>
                                 <span class="caret"></span>
                             </a>
                             <div class="collapse" id="maps">
                                 <ul class="nav nav-collapse">
                                     <li>
-                                        <a href="maps/googlemaps.html">
-                                            <span class="sub-item">List Faculties</span>
+                                        <a href="{{route('teachers.index')}}">
+                                            <span class="sub-item">List Teachers</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="maps/jsvectormap.html">
-                                            <span class="sub-item">Add Faculty</span>
+                                        <a href="{{route('teachers.create')}}">
+                                            <span class="sub-item">Add Teacher</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -569,7 +569,16 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Account Setting</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Logout</a>
+
+                                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                class="d-none">
+                                                @csrf
+                                            </form>
                                         </li>
                                     </div>
                                 </ul>
@@ -675,9 +684,9 @@
 
     <script>
     $(document).ready(function() {
-        $("#student-datatables").DataTable({});
+        $(".datatables").DataTable({
 
-
+        });
     });
     </script>
 </body>

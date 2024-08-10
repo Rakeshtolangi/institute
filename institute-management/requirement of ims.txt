@@ -63,3 +63,12 @@ admission info
 </td>  
 
 
+sat, Aug, 10 requirements
+- Course Category (CURD)
+- Admission form 
+- Attandance (Teacher & Student)
+- Follow up / Record (Hold)
+- cetrificate
+- Payroll
+-Expense (CURD/ Category-CURD)
+

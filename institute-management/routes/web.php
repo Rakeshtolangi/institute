@@ -30,7 +30,3 @@ Auth::routes();
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::post('enquiry', [StudentController::class, 'showEnquiryForm'])->name('enquiries.enquiry');
-// Route::post('enquiry', [StudentController::class, 'submitEnquiry'])->name('enquiries.submitEnquiry');
-// Route::get('enquiries', [StudentController::class, 'listEnquiries'])->name('enquiries.listEnquiries');

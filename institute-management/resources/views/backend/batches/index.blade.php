@@ -22,7 +22,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="batches-datatables" class="display table table-striped table-hover">
+                            <table id="batches-datatables" class="datatables display table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>S.N.</th>

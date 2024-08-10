@@ -24,7 +24,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="enquiries-datatables" class="display table table-striped table-hover">
+                            <table id="enquiries-datatables" class="datatables display table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>S.N.</th>
@@ -86,16 +86,3 @@
     </div>
 </div>
 @endsection
-
-@push('scripts')
-<script>
-$(document).ready(function() {
-    $('#enquiries-datatables').DataTable({
-        // DataTables options can be added here
-        "order": [
-            [0, 'asc']
-        ]
-    });
-});
-</script>
-@endpush

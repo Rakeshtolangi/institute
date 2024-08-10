@@ -22,14 +22,20 @@
 <div class="row g-3 mt-3">
     <div class="col-md-6">
         <label for="duration">Duration</label>
-        <input type="text" name="duration" id="duration" class="form-control"
+        <input type="number" name="duration" id="duration" class="form-control"
             value="{{ old('duration', $course->duration ?? '') }}" required>
     </div>
 
     <div class="col-md-6">
         <label for="type">Type</label>
-        <input type="text" name="type" id="type" class="form-control" value="{{ old('type', $course->type ?? '') }}"
-            required>
+        <select name="type" id="type" class="form-control" required>
+            <option value="days">
+                Days
+            </option>
+            <option value="months">
+                Months
+            </option>
+        </select>
     </div>
 </div>
 

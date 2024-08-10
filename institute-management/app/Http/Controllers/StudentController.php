@@ -16,10 +16,6 @@ class StudentController extends Controller
         $students = Student::with('classModel')->get();
         return view('backend.students.index', compact('students'));
 
-        
-// count total number of students
-        $totalStudents = Student::count();
-        return view('dashboard', compact('totalStudents'));
     }
 
     public function create()

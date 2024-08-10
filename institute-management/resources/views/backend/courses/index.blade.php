@@ -22,10 +22,11 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="course-datatables" class="display table table-striped table-hover">
+                            <table id="course-datatables" class="datatables display table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>S.N.</th>
+                                        <th>Image</th>
                                         <th>Title</th>
                                         <th>Category</th>
                                         <th>Duration</th>
@@ -40,6 +41,11 @@
                                     @foreach ($courses as $key => $course)
                                     <tr>
                                         <td>{{ $key  + 1 }}</td>
+                                        <td>
+
+                                            <img src="{{asset($course->image)}}" alt="" srcset="" height="70px"
+                                                width="70px">
+                                        </td>
                                         <td>{{ $course->title }}</td>
                                         <td>{{ $course->category->name }}</td>
                                         <td>{{ $course->duration }}</td>

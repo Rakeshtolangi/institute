@@ -7,6 +7,7 @@ use App\Models\Shift;
 use App\Models\Student;
 use App\Models\ClassModel;
 use App\Models\Course;  
+USE App\Models\Category;
 
 class ShiftController extends Controller
 {

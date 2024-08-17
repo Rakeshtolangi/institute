@@ -31,4 +31,17 @@ class Student extends Model
     {
         return $this->belongsTo(ClassModel::class, 'class_id');
     }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class);
+    }
+    public function shift()
+    {
+        return $this->belongsTo(Shift::class);
+    }
 }

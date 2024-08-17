@@ -36,9 +36,7 @@
                                     <input type="text" name="father_name" id="father_name" class="form-control"
                                         value="{{$student->father_name}}">
                                 </div>
-                            </div>
-
-                            <div class="row g-3">
+                          
                                 <div class="col-md-6">
                                     <label for="dob">Date of Birth</label>
                                     <input type="date" name="dob" id="dob" class="form-control"
@@ -51,8 +49,6 @@
                                         value="{{$student->email}}">
                                 </div>
 
-                            </div>
-                            <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for=" mobile">Mobile Number</label>
                                     <input type="text" name="mobile" id="mobile" class="form-control"
@@ -68,47 +64,44 @@
                                             Female</option>
                                     </select>
                                 </div>
-                            </div>
-
-                            <div class="row g-3">
+                           
                                 <div class="col-md-6">
                                     <label for="course_id">Course</label>
                                     <select name="course_id" id="course_id" class="form-control">
-                                        <!-- @foreach ($courses as $course)
-                                            <option value="{{ $course->id }}"
-                                                {{ (old('course_id') ?? $student->course_id ?? '') == $course->id ? 'selected' : '' }}>
-                                                {{ $course->name }}
-                                            </option>
-                                            @endforeach -->
-                                        <option value="1" {{ $student->category_id == '1' ? 'selected' : '' }}>
-                                            1
+                                        @foreach ($courses as $course)
+                                        <option value="{{ $course->id }}"
+                                            {{  $student->course_id  == $course->id ? 'selected' : '' }}>
+                                            {{ $course->title }}
                                         </option>
-                                        <option value="2" {{ $student->category_id == '2' ? 'selected' : '' }}>
-                                            2
-                                        </option>
+                                        @endforeach
                                     </select>
                                 </div>
 
-                                <!-- <div class="form-group">
-                                        <label for="batch_id">Batch</label>
-                                    </div> -->
+                                <div class="col-md-6 mb-2">
+                                    <label for="batch_id">Batch</label>
+                                    <select name="batch_id" id="batch_id" class="form-control">
+                                        <option value="">Choose..</option>
+                                        @foreach ($batches as $batch)
+                                        <option value="{{ $batch->id }}"
+                                            {{  $student->batch_id  == $batch->id ? 'selected' : '' }}>
+                                            {{ $batch->title }}
+                                        </option>
+                                        @endforeach
 
-                                <div class="col-md-6">
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-2">
                                     <label for="course_fee">Course Fee</label>
                                     <input type="number" name="course_fee" id="course_fee" class="form-control"
                                         value="{{$student->course_fee}}">
                                 </div>
 
-                            </div>
-
-                            <div class="row g-3">
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <label for="student_fee">Student Fee</label>
                                     <input type="number" name="student_fee" id="student_fee" class="form-control"
                                         value="{{$student->student_fee}}">
                                 </div>
                             </div>
-                            <input type="text" value="1" name="batch_id">
 
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>

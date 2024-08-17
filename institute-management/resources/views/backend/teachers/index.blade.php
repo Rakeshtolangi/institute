@@ -42,7 +42,7 @@
                                         <td>{{ $key  + 1 }}</td>
                                         <td>{{ $teacher->name }}</td>
                                         <td>{{ $teacher->email }}</td>
-                                        <td>{{ $teacher->mobile }}</td>
+                                        <td>{{ $teacher->phone }}</td>
                                         <td>{{ $teacher->course }}</td>
                                         <!-- <td>{{ $teacher->batch }}</td>
                                         <td>{{ $teacher->gender }}</td>

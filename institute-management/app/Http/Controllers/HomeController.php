@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Batch;
 use App\Models\ClassModel;
 use App\Models\Course;  
+use App\Models\Teacher;  
+
 
 class HomeController extends Controller
 {
@@ -27,6 +30,9 @@ class HomeController extends Controller
     public function index()
     {
         $totalStudents = Student::count();
-        return view('backend.dashboard', compact('totalStudents'));
+        $totalCourses = Course::count();
+        $totalBatches = Batch::count();
+        $totalTeachers = Teacher::count();
+        return view('backend.dashboard', compact('totalStudents' , 'totalCourses','totalBatches','totalTeachers'));
     }
 }

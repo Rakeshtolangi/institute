@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h1>Edit Student</h1>
-    <form action="{{ route('students.update', $student->id) }}" method="POST">
+    <h1>Edit Teacher</h1>
+    <form action="{{ route('teachers.update', $teachers->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="row g-3">

@@ -35,6 +35,11 @@
     <link rel="stylesheet" href="{{asset('assets/css/kaiadmin.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/customCss.css')}}" />
 
+    <style>
+        .form-control{
+            border-color:#d0d0d0e3 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -84,7 +89,7 @@
 
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarLayoutsEnquiries">
-                                <i class="fas fa-th-list"></i>
+                                <i class="far fa-lightbulb"></i>
                                 <p>Manage Enquires</p>
                                 <span class="caret"></span>
                             </a>
@@ -128,7 +133,7 @@
                         </li>
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#forms">
-                                <i class="fas fa-pen-square"></i>
+                                <i class="fas fa-book-open"></i>
                                 <p>Manage Batches</p>
                                 <span class="caret"></span>
                             </a>
@@ -149,7 +154,7 @@
                         </li>
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#tables">
-                                <i class="fas fa-table"></i>
+                                <i class="fas fa-graduation-cap"></i>
                                 <p>Manage Courses</p>
                                 <span class="caret"></span>
                             </a>
@@ -189,18 +194,64 @@
                                 </ul>
                             </div>
                         </li>
+
+
                         <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#charts">
-                                <i class="far fa-chart-bar"></i>
+                            <a href="{{route('attendance.index')}}">
+                                <i class="fas fa-book"></i>
                                 <p>Attendences</p>
                             </a>
-
                         </li>
+
+                        <!-- categories dropdown -->
                         <li class="nav-item">
-                            <a href="widgets.html">
-                                <i class="fas fa-desktop"></i>
-                                <p>Emails</p>
-                                <span class="badge badge-success">4</span>
+                            <a data-bs-toggle="collapse" href="#sidebarLayoutsCategories">
+                                <i class="fas fa-pencil-alt"></i>
+                                <p>Masters</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="sidebarLayoutsCategories">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="{{route('categories.index')}}">
+                                            <span class="sub-item">Course Category</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('designations.index')}}">
+                                            <span class="sub-item">Designation</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('expense-categories.index')}}">
+                                            <span class="sub-item">Expenses Category</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- HRM dropdown -->
+                        <li class="nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarLayoutsHRM">
+                                <i class="fas fa-sitemap"></i>
+                                <p>HRM</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="sidebarLayoutsHRM">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="#">
+                                            <span class="sub-item">Payroll</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('expenses.create')}}">
+                                <i class="fas fa-dollar-sign"></i>
+                                <p>Expenses</p>
                             </a>
                         </li>
 
@@ -208,7 +259,6 @@
                             <a href="widgets.html">
                                 <i class="fas fa-desktop"></i>
                                 <p>Reports</p>
-                                <span class="badge badge-success">4</span>
                             </a>
                         </li>
 

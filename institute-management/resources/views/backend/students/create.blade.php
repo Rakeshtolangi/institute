@@ -8,7 +8,6 @@
             <h3 class="fw-bold mb-3">Add Student</h3>
             <div class="float-right">
                 <a href="{{ route('students.index') }}" class="btn btn-primary">List Students</a>
-
             </div>
 
 
@@ -28,12 +27,10 @@
                         <form action="{{ route('students.store') }}" method="POST">
                             @csrf
                             @include('backend.students._form')
-                            <input type="text" value="1" name="batch_id">
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>

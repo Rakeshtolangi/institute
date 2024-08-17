@@ -23,4 +23,8 @@ class Shift extends Model
     {
         return $this->hasMany(ClassModel::class, 'shift_id');
     }
+    public function student()
+    {
+        return $this->hasMany(Student::class, 'shift_id');
+    }
 }

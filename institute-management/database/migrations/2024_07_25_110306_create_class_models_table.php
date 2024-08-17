@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('class_models', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('teacher_id');
+            $table->bigInteger('batch_id');
+            $table->bigInteger('shift_id');
+            $table->bigInteger('course_id');
             $table->timestamps();
         });
     }

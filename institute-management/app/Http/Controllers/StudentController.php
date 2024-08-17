@@ -6,23 +6,29 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\ClassModel;
 use App\Models\Course;  
+use App\Models\Category;
+use App\Models\Batch;
 
 
 
 class StudentController extends Controller
 {
     public function index()
+    
     {
-        $students = Student::with('classModel')->get();
+        $students = Student::latest()->get();
         return view('backend.students.index', compact('students'));
 
     }
 
     public function create()
     {
-        $classes = ClassModel::all();
+        // $classes = ClassModel::all();
         $courses = Course::all();
-        return view('backend.students.create', compact('classes', 'courses'));
+        $batches = Batch::all();
+
+ 
+        return view('backend.students.create', compact('courses','batches'));
     }
 
     public function store(Request $request)
@@ -62,9 +68,10 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         
-        $classes = ClassModel::all();
+        // $classes = ClassModel::all();
         $courses = Course::all();
-        return view('backend.students.edit', compact('student', 'classes', 'courses'));
+        $batches = Batch::all();
+        return view('backend.students.edit', compact('student', 'batches', 'courses'));
     }
 
     public function update(Request $request, Student $student)
@@ -96,7 +103,29 @@ class StudentController extends Controller
         return redirect()->route('students.index')->with('success', 'Student deleted successfully!');
     }
 
-  
+//   report generating model in studentmodel
+public function feeReport(Request $request)
+{
+    $query = Student::query();
+
+    // Filter by date range if provided
+    if ($request->has('from_date') && $request->has('to_date')) {
+        $query->whereBetween('created_at', [$request->from_date, $request->to_date]);
+    }
+
+    // Get the list of students along with their related batch and course information
+    $students = $query->with(['course', 'batch']);
+
+    // Calculate the totals
+    $totalCourseFee = $students->sum('course_fee');
+    $totalStudentFee = $students->sum('student_fee');
+    $totalPaidFee = $students->sum('paid_fee');  // Assuming you have a `paid_fee` column
+    $totalDueFee = $totalStudentFee - $totalPaidFee;
+
+    return view('backend.reports.fee_report', compact(
+        'students', 'totalCourseFee', 'totalStudentFee', 'totalPaidFee', 'totalDueFee'
+    ));
+}
 
     
 // enquiry form student model

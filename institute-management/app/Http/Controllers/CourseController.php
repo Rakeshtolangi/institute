@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Category;
 
+
 class CourseController extends Controller
 {
     /**

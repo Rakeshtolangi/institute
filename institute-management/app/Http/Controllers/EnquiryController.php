@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Enquiry;
 use App\Models\Course;
+USE App\Models\Category;
 
 class EnquiryController extends Controller
 {
@@ -23,7 +24,7 @@ class EnquiryController extends Controller
     public function create()
     {
         $courses = Course::all();
-        return view('backend.enquiries.enquiry', compact('courses'));
+        return view('backend.enquiries.create', compact('courses'));
     }
     
 
@@ -63,7 +64,8 @@ class EnquiryController extends Controller
     public function edit(string $id)
     {
         $enquiry = Enquiry::findOrFail($id);
-        return view('backend.enquiries.edit', compact('enquiry'));
+        $courses = Course::all();  
+        return view('backend.enquiries.edit', compact('enquiry','courses'));
 
     }
 
@@ -98,4 +100,6 @@ class EnquiryController extends Controller
         return redirect()->route('enquiries.index')->with('success', 'Enquiry deleted successfully.');
    
     }
+
+    
 }

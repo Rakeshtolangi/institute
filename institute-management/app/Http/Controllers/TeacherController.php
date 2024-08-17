@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Teacher;
 use App\Models\ClassModel;
-use App\Models\Course;  
+use App\Models\Course; 
+USE App\Models\Category; 
 
 
 class TeacherController extends Controller

@@ -13,7 +13,7 @@ class Batch extends Model
         'title',
         'start_date',
         'end_date',
-       'description' 
+        'description' 
         // Add other attributes if necessary
     ];
 
@@ -21,5 +21,10 @@ class Batch extends Model
     public function classes()
     {
         return $this->hasMany(ClassModel::class);
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class);
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Batch;
 USE App\Models\Student;
 USE App\Models\Course;
+USE App\Models\Category;
 
 
 class BatchController extends Controller
@@ -33,13 +34,14 @@ class BatchController extends Controller
     public function store(Request $request)
     {
        
-        $validated = $request->validate([
+        // dd($request->all());
+         $request->validate([
             'title' => 'required|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
         ]);
         // dd($validated) ->all();
-        Batch::create($validated);
+        Batch::create($request->all());
 
         return redirect()->route('batches.index')->with('success', 'Batch created successfully.');
     }

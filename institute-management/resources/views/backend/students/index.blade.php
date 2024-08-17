@@ -48,8 +48,8 @@
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->email }}</td>
                                         <td>{{ $student->mobile }}</td>
-                                        <td>{{ $student->course }}</td>
-                                        <td>{{ $student->batch }}</td>
+                                        <td>{{ $student->course->title }}</td>
+                                        <td>{{ $student->batch->title }}</td>
                                         <td>{{ $student->gender }}</td>
                                         <td>{{ $student->course_fee }}</td>
                                         <td>{{ $student->student_fee }}</td>

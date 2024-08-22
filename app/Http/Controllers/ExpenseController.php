@@ -9,35 +9,45 @@ use App\Models\Course;
 use App\Models\Category;
 use App\Models\Teacher;
 use App\Models\Student;
+use App\Models\ExpenseCategory;
+
 
 class ExpenseController extends Controller
 {
     public function index()
     {
-        $expenses = Expense::all();
+        $expenses = Expense::with('expenseCategory')->get();
         return view('backend.expenses.index', compact('expenses'));
     }
 
     public function create()
-    {
-        return view('backend.expenses.create');
-    }
+{
+    $expenseCategories = ExpenseCategory::all();
+    return view('backend.expenses.create', compact('expenseCategories'));
+}
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'expense_date' => 'required|date',
-            'title' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
-            'amount' => 'required|numeric',
-            'file' => 'nullable|string', // Assuming file is a string (file path). Adjust as needed.
-            'description' => 'nullable|string',
-        ]);
+public function store(Request $request)
+{
+    // dd($request->all());
+    $validated = $request->validate([
+        'expense_date' => 'required|date',
+        'title' => 'required|string|max:255',
+        'expense_category_id' => 'required|exists:expense_categories,id',
+        'amount' => 'required|numeric',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        'description' => 'nullable|string',
+    ]);
 
-        Expense::create($validated);
+       if ($request->hasFile('image')) {
+            $fileName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('uploads/expenses'), $fileName);
+            $validated['image'] = 'uploads/expeses/' . $fileName;
+        }
 
-        return redirect()->route('expenses.index')->with('success', 'Expense added successfully!');
-    }
+    Expense::create($validated);
+
+    return redirect()->route('expenses.index')->with('success', 'Expense added successfully!');
+}
 
     public function show(Expense $expense)
     {
@@ -45,26 +55,26 @@ class ExpenseController extends Controller
     }
 
     public function edit(Expense $expense)
-    {
-        $categories = Category::all(); 
-        return view('backend.expenses.edit', compact('expense'));
-    }
+{
+    $expenseCategories = ExpenseCategory::all();
+    return view('backend.expenses.edit', compact('expense', 'expenseCategories'));
+}
 
-    public function update(Request $request, Expense $expense)
-    {
-        $validated = $request->validate([
-            'expense_date' => 'required|date',
-            'title' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
-            'amount' => 'required|numeric',
-            'file' => 'nullable|string',
-            'description' => 'nullable|string',
-        ]);
+public function update(Request $request, Expense $expense)
+{
+    $validated = $request->validate([
+        'expense_date' => 'required|date',
+        'title' => 'required|string|max:255',
+        'expense_category_id' => 'required|exists:expense_categories,id', // Validate and include the category ID
+        'amount' => 'required|numeric',
+        'file' => 'nullable|string',
+        'description' => 'nullable|string',
+    ]);
 
-        $expense->update($validated);
+    $expense->update($validated);
 
-        return redirect()->route('expenses.index')->with('success', 'Expense updated successfully!');
-    }
+    return redirect()->route('expenses.index')->with('success', 'Expense updated successfully!');
+}
 
     public function destroy(Expense $expense)
     {

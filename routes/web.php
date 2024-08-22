@@ -13,6 +13,9 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\AttandanceController;
 use App\Http\Controllers\ExpenseCategoryController;
+use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\FeesController;
+
 
 
 // Route::get('/', function () {
@@ -25,7 +28,11 @@ use App\Http\Controllers\ExpenseCategoryController;
 
 
 Route::resource('students', StudentController::class);
+Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
+
 Route::resource('teachers', TeacherController::class);
+Route::get('/teachers/{teacher}', [TeacherController::class, 'show'])->name('teachers.show');
+
 Route::resource('courses', CourseController::class);
 Route::resource('classes', ClassController::class);
 Route::resource('shifts', ShiftController::class);
@@ -36,7 +43,9 @@ Route::resource('expenses', ExpenseController::class);
 Route::resource('designations', DesignationController::class);
 
 Route::resource('expense-categories',ExpenseCategoryController::class);
-
+Route::resource('payrolls', PayrollController::class);
+Route::resource('fees', FeesController::class);
+Route::get('fees/student/{id}',[FeesController::class, 'addPayment'])->name('fees.addpayment');
 // Make a custom route for students
 
 Auth::routes();

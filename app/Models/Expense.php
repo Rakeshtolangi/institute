@@ -12,9 +12,15 @@ class Expense extends Model
     protected $fillable = [
         'expense_date',
         'title',
-        'category',
+        'expense_category_id',
         'amount',
-        'file',
+        'image',
         'description',
     ];
+
+    // Define the relationship with ExpenseCategory
+    public function expenseCategory()
+    {
+        return $this->belongsTo(ExpenseCategory::class);
+    }
 }

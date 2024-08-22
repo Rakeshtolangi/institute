@@ -42,13 +42,12 @@
                                         <td>{{ $key  + 1 }}</td>
                                         <td>{{ $expense->expense_date }}</td>
                                         <td>{{ $expense->title }}</td>
-                                        <td>{{ $expense->category }}</td>
+                                        <td>{{ $expense->expenseCategory->title }}</td>
                                         <td>{{ $expense->amount }}</td>
                                         <td>{{ $expense->description }}</td>
                                         <td>
-                                            @if($expense->file)
-                                            <a href="{{ asset('storage/' . $expense->file) }}" target="_blank">View File</a>
-                                            @endif
+                                            
+                                            <img src="{{asset($expense->image )}}" alt="" srcset="">
                                         </td>
                                         <td>
                                             <div class="btn-group dropstart">

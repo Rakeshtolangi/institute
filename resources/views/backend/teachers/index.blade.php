@@ -40,7 +40,11 @@
                                     @foreach ($teachers as $key => $teacher)
                                     <tr>
                                         <td>{{ $key  + 1 }}</td>
-                                        <td>{{ $teacher->name }}</td>
+                                        <td>
+                                            <a href="{{ route('teachers.show', $teacher->id) }}">
+                                                {{ $teacher->name }}
+                                            </a>
+                                        </td>
                                         <td>{{ $teacher->email }}</td>
                                         <td>{{ $teacher->phone }}</td>
                                         <td>{{ $teacher->course }}</td>

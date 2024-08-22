@@ -38,7 +38,12 @@ class ExpenseCategoryController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'expense_category_id' => 'required',
+          
+
+
         ]);
+     
 
         ExpenseCategory::create($validated);
 

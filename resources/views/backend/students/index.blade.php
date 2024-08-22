@@ -45,7 +45,11 @@
                                     @foreach ($students as $key => $student)
                                     <tr>
                                         <td>{{ $key  + 1 }}</td>
-                                        <td>{{ $student->name }}</td>
+                                        <td>
+                                            <a href="{{ route('students.show', $student->id) }}">
+                                                {{ $student->name }}
+                                            </a>
+                                        </td>
                                         <td>{{ $student->email }}</td>
                                         <td>{{ $student->mobile }}</td>
                                         <td>{{ $student->course->title }}</td>

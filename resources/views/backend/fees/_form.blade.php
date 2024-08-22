@@ -1,4 +1,3 @@
-<!-- resources/views/backend/teachers/_form.blade.php -->
 <div class="row g-3">
     <div class="col-md-6">
         <label for="name">Name</label>
@@ -89,7 +88,7 @@
     <div class="col-md-6">
         <label for="designation">Designation</label>
         <select name="designation_id" id="designation" class="form-control">
-            @foreach($designation as $designation)
+            @foreach($designations as $designation) <!-- Use $designations -->
                 <option value="{{ $designation->id }}" {{ old('designation_id') == $designation->id ? 'selected' : '' }}>
                     {{ $designation->title }}
                 </option>
@@ -97,3 +96,4 @@
         </select>
     </div>
 </div>
+

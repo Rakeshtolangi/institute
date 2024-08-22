@@ -240,7 +240,7 @@
                             <div class="collapse" id="sidebarLayoutsHRM">
                                 <ul class="nav nav-collapse">
                                     <li>
-                                        <a href="#">
+                                        <a href="{{route('payrolls.create')}}">
                                             <span class="sub-item">Payroll</span>
                                         </a>
                                     </li>
@@ -248,8 +248,17 @@
                             </div>
                         </li>
 
+                        <!-- Collect Fees -->
                         <li class="nav-item">
-                            <a href="{{route('expenses.create')}}">
+                            <a href="{{route('fees.index')}}">
+                                <i class="fas fa-tag"></i>
+                                <p>Collect Fees</p>
+                            </a>
+                       
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('expenses.index')}}">
                                 <i class="fas fa-dollar-sign"></i>
                                 <p>Expenses</p>
                             </a>

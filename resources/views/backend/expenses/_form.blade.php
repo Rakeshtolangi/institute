@@ -12,16 +12,17 @@
 </div>
 
 <div class="row g-3 mt-3">
-    <div class="col-md-6">
-        <label for="category">Category</label>
-        <select name="category" id="category" class="form-control" required>
-            @foreach($categories as $category)
-            <option value="{{ $category->id }}" {{ (old('category') ?? $expense->category ?? '') == $category->id ? 'selected' : '' }}>
-                {{ $category->name }}
+<div class="col-md-6">
+    <label for="expense_category_id">Expense Category</label>
+    <select name="expense_category_id" id="expense_category_id" class="form-control" required>
+        @foreach($expenseCategories as $expenseCategory)
+            <option value="{{ $expenseCategory->id }}" {{ (old('expense_category_id') ?? $expense->expense_category_id ?? '') == $expenseCategory->id ? 'selected' : '' }}>
+                {{ $expenseCategory->title }}
             </option>
-            @endforeach
-        </select>
-    </div>
+        @endforeach
+    </select>
+</div>
+
 
     <div class="col-md-6">
         <label for="amount">Amount</label>
@@ -32,10 +33,8 @@
 <div class="row g-3 mt-3">
     <div class="col-md-6">
         <label for="file">File</label>
-        <input type="file" name="file" id="file" class="form-control">
-        @if(isset($expense) && $expense->file)
-        <a href="{{ asset('storage/' . $expense->file) }}" class="mt-2 d-block">Download file</a>
-        @endif
+        <input type="file" name="image" id="image" class="form-control">
+     
     </div>
 </div>
 

@@ -14,9 +14,19 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('father_name')->nullable();
             $table->string('email')->unique();
             $table->string('phone');
-            // $table->unsignedBigInteger('subject_id');
+            $table->enum('gender', ['male', 'female']);
+            $table->date('dob');
+            $table->string('image')->nullable();
+            $table->text('address');
+            $table->bigInteger('batch_id');
+            $table->bigInteger('course_id');
+            $table->string('qualification');
+            $table->integer('experience');
+            $table->date('date_of_join');
+            $table->string('designation_id');
             $table->timestamps();
         });
     }

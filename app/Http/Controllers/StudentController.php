@@ -34,9 +34,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $validated = $request->validate([
-            //adding this to check if data is being received correctly
-    
+        $validated = $request->validate([    
             'name' => 'required|string|max:255',
             'father_name' => 'required|string|max:255',
             'dob' => 'required|date',
@@ -61,7 +59,7 @@ class StudentController extends Controller
     public function show(Student $student)
     {  
         
-        return view('backend.students.profile', compact('student'));
+        return view('backend.students.s_profile', compact('student'));
     }
 
 

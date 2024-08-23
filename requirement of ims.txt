@@ -1,3 +1,4 @@
+
 prob statements
 
 1. profile.blade.php access same file by teacher and student . edit garda problem.
@@ -41,3 +42,17 @@ sat, Aug, 10 requirements
     - Redo
     - Fee CURD
     - Std Admission random number
+
+1st draft requirements. (aug 21)
+        make the attachment file section on the teacher/student
+Done > remove the section master.
+Done >  add all the category to their respective category elements
+        Add user
+        Make id pannel system
+determined the fee category
+        make a proper visualized border
+        change the icon in expenses table
+        remove all the dollar signs na make them nepali rupees
+        text should be visible (not gray)
+        add teh teacher and students panel with all the respectivbe roles to be added.
+

@@ -40,7 +40,7 @@
         <select name="course_id" id="course_id" class="form-control">
         <option value="">Choose..</option>
 
-          @foreach ($courses as $course)
+        @foreach ($courses as $course)
         <option value="{{ $course->id }}">
             {{ $course->title }}
         </option>
@@ -57,9 +57,9 @@
             {{ $batch->title }}
         </option>
         @endforeach 
-        
         </select>
     </div>
+    
     <div class="col-md-6 mb-2">
         <label for="course_fee">Course Fee</label>
         <input type="number" name="course_fee" id="course_fee" class="form-control" value="">

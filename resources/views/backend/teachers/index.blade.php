@@ -26,13 +26,22 @@
                                     <tr>
                                         <th>S.N.</th>
                                         <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Mobile no.</th>
-                                        <th>Course</th>
-                                        <!-- <th>Batch</th>
-                                        <th>Gender</th>
-                                        <th>Course Fee</th>
-                                        <th>Student Fee</th> -->
+                                        <th>father_name</th>
+                                        <th>email</th>
+                                        <th>Phone</th>
+                                        <th>gender</th>
+                                        <th>dob</th>
+                                        <th>image</th>
+                                        <th>address</th>
+                                        <th>course</th>
+                                        <th>Batch</th>
+                                        <th>qualification</th>
+                                        <th>experience</th>
+                                        <th>date_of_join</th>
+                                        <th>designation</th>
+
+
+                                        
                                         <th class="no-sorting">Actions</th>
                                     </tr>
                                 </thead>
@@ -45,13 +54,24 @@
                                                 {{ $teacher->name }}
                                             </a>
                                         </td>
+                                        <td>{{ $teacher->father_name }}</td>
                                         <td>{{ $teacher->email }}</td>
                                         <td>{{ $teacher->phone }}</td>
-                                        <td>{{ $teacher->course }}</td>
-                                        <!-- <td>{{ $teacher->batch }}</td>
                                         <td>{{ $teacher->gender }}</td>
-                                        <td>{{ $teacher->course_fee }}</td>
-                                        <td>{{ $teacher->student_fee }}</td> -->
+                                        <td>{{ $teacher->dob }}</td>
+                                        <td>
+
+                                            <img src="{{asset($teacher->image)}}" alt="" srcset="" height="70px"
+                                                width="70px">
+                                        </td>
+                                        <td>{{ $teacher->address }}</td>
+                                        <td>{{ $teacher->course->title }}</td>
+                                        <td>{{ $teacher->batch->title }}</td>
+                                        <td>{{ $teacher->qualification }}</td>
+                                        <td>{{ $teacher->experience }}</td>
+                                        <td>{{ $teacher->date_of_join }}</td>
+                                        <td>{{ $teacher->designation }}</td>
+                                        
                                         <td>
                                             <div class="btn-group dropstart">
                                                 <button type="button" class="btn  dropdown-toggle"

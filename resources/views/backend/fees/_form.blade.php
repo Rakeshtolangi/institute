@@ -61,14 +61,16 @@
         <label for="course">Course</label>
         <select name="course_id" id="course" class="form-control">
             @foreach($courses as $course)
-                <option value="{{ $course->id }}" {{ old('course_id') == $course->id ? 'selected' : '' }}>{{ $course->title }}</option>
+            <option value="{{ $course->id }}" {{ old('course_id') == $course->id ? 'selected' : '' }}>
+                {{ $course->title }}</option>
             @endforeach
         </select>
     </div>
 
     <div class="col-md-6">
         <label for="qualification">Qualification</label>
-        <input type="text" name="qualification" id="qualification" class="form-control" value="{{ old('qualification') }}">
+        <input type="text" name="qualification" id="qualification" class="form-control"
+            value="{{ old('qualification') }}">
     </div>
 </div>
 
@@ -80,20 +82,19 @@
 
     <div class="col-md-6">
         <label for="date_of_join">Date of Join</label>
-        <input type="date" name="date_of_join" id="date_of_join" class="form-control" value="{{ old('date_of_join', date('Y-m-d')) }}">
+        <input type="date" name="date_of_join" id="date_of_join" class="form-control"
+            value="{{ old('date_of_join', date('Y-m-d')) }}">
     </div>
 </div>
 
 <div class="row g-3 mt-3">
     <div class="col-md-6">
-        <label for="designation">Designation</label>
-        <select name="designation_id" id="designation" class="form-control">
-            @foreach($designations as $designation) <!-- Use $designations -->
-                <option value="{{ $designation->id }}" {{ old('designation_id') == $designation->id ? 'selected' : '' }}>
-                    {{ $designation->title }}
-                </option>
+        <label for="designations_id">Select Role</label>
+        <select name="designations_id" id="designations_id" class="form-control" required>
+            <option value="">-- Select Course --</option>
+            @foreach($designations as $designation)
+            <option value="{{ $designation->id }}">{{ $designation->name     }}</option>
             @endforeach
         </select>
     </div>
 </div>
-

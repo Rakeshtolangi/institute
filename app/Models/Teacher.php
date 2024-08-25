@@ -18,8 +18,8 @@ class Teacher extends Model
         'dob',
         'image',
         'address',
-        'course',
-        'batch', //need to add in database table
+        'course_id',
+        'batch_id',
         'qualification',
         'experience',
         'date_of_join',
@@ -36,7 +36,7 @@ class Teacher extends Model
     {
         return $this->belongsTo(Course::class);
     }
-
+    
     public function batch()
     {
         return $this->belongsTo(Batch::class);

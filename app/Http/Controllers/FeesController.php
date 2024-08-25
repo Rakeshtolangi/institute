@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Models\Course;
 use App\Models\Batch;
 use App\Models\Fee;
+use App\Models\FeesCategory;
 use Illuminate\Support\Str;
 
 class FeesController extends Controller
@@ -59,8 +60,6 @@ class FeesController extends Controller
 
 public function addPayment($id)
 {
-
- 
     $reciept_no = $this->generateUniqueId();
     $batches = Batch::all(); // Fetch all batches
     $student = Student::findOrFail($id);
@@ -69,13 +68,10 @@ public function addPayment($id)
     return view('backend.fees.create', compact('fee','reciept_no', 'batches','student'));
 }
 
-
-
     // Generate random unique number
     private function generateUniqueId()
 {
     $date = date('Ymd');
-
     $randomString = Str::upper(Str::random(5)); // Generates a 5-character alphanumeric string
     return "IMS-{$date}-{$randomString}";
 }

@@ -15,6 +15,7 @@ use App\Http\Controllers\AttandanceController;
 use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\FeesController;
+use App\Http\Controllers\FeesCategoryController;
 
 
 
@@ -45,6 +46,8 @@ Route::resource('designations', DesignationController::class);
 Route::resource('expense-categories',ExpenseCategoryController::class);
 Route::resource('payrolls', PayrollController::class);
 Route::resource('fees', FeesController::class);
+Route::resource('fees-categories', FeesCategoryController::class);
+
 Route::get('fees/student/{id}',[FeesController::class, 'addPayment'])->name('fees.addpayment');
 // Make a custom route for students
 

@@ -9,12 +9,9 @@ use App\Models\Course;
 use App\Models\Category;
 use App\Models\Batch;
 
-
-
 class StudentController extends Controller
 {
     public function index()
-    
     {
         $students = Student::latest()->get();
         return view('backend.students.index', compact('students'));
@@ -41,9 +38,9 @@ class StudentController extends Controller
             'email' => 'required|email|max:255',
             'mobile' => 'required|string|max:15',
             'gender' => 'required|in:male,female',
-             'course_id' => 'required',
+            'course_id' => 'required',
             'batch_id' => 'required',
-
+            
             'course_fee' => 'required',
             'student_fee' => 'required',
         ]); 

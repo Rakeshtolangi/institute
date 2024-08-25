@@ -97,11 +97,13 @@
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="{{route('enquiries.index')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">List Enquires</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('enquiries.create')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">Add Enquires</span>
                                         </a>
                                     </li>
@@ -120,11 +122,13 @@
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="{{route('students.index')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">List Students</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('students.create')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">Add Student</span>
                                         </a>
                                     </li>
@@ -141,11 +145,13 @@
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="{{route('batches.index')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">List Batches</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('shifts.index')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">List Shifts</span>
                                         </a>
                                     </li>
@@ -162,16 +168,19 @@
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="{{route('courses.index')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">List Courses</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('courses.create')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">Add Course</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('categories.index')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">Course Category</span>
                                         </a>
                                     </li>
@@ -188,11 +197,13 @@
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="{{route('teachers.index')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">List Teachers</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('teachers.create')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">Add Teacher</span>
                                         </a>
                                     </li>
@@ -208,7 +219,7 @@
                             </a>
                         </li>
 
-                        
+
                         <!-- HRM dropdown -->
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarLayoutsHRM">
@@ -219,6 +230,7 @@
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="{{route('payrolls.create')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">Payroll</span>
                                         </a>
                                     </li>
@@ -226,12 +238,33 @@
                             </div>
                         </li>
 
-                        <!-- Collect Fees -->
+                        <!--Fees dropdown -->
                         <li class="nav-item">
-                            <a href="{{route('fees.index')}}">
-                                <i class="fas fa-tag"></i>
+                            <a data-bs-toggle="collapse" href="#sidebarLayoutsfees">
+
+                                <!-- <i class="bi bi-currency-rupee"></i> -->
+                                <i class='fas fa-rupee-sign'></i>
                                 <p>Collect Fees</p>
+                                <span class="caret"></span>
+
                             </a>
+                            <div class="collapse" id="sidebarLayoutsfees">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="{{route('fees.index')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
+                                            <p>Fees</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('fees-categories.create')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
+                                            <span class="sub-item">Fees Category</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
                         </li>
 
                         <!-- Expenses dropdown -->
@@ -250,8 +283,8 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                    <a href="{{route('expense-categories.index')}}">
-                                            <i class="fas fa-dollar-sign"></i>
+                                        <a href="{{route('expense-categories.index')}}">
+                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <p>Expenses Category</p>
                                         </a>
                                     </li>
@@ -262,7 +295,7 @@
                         <!-- Designations -->
                         <li class="nav-item">
                             <a href="{{route('designations.index')}}">
-                            <i class="fas fa-desktop"></i>
+                                <i class="fas fa-desktop"></i>
                                 <span class="sub-item">Designation</span>
                             </a>
                         </li>

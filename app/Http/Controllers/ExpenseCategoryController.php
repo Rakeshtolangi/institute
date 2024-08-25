@@ -39,14 +39,8 @@ class ExpenseCategoryController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'expense_category_id' => 'required',
-          
-
-
         ]);
-     
-
         ExpenseCategory::create($validated);
-
         return redirect()->route('expense-categories.index')->with('success', 'Expense Category created successfully.');
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Models\Teacher;
@@ -9,27 +10,27 @@ use App\Models\Course;
 use App\Models\Designation;
 use App\Models\Batch;
 use App\Models\Student;
+use App\Models\Category;
 
 class TeacherController extends Controller
 {
     public function index()
     {
-        
-        $teachers = Teacher::with('classModel')->get();
+        $teachers = Teacher::all();
         return view('backend.teachers.index', compact('teachers'));
     }
 
     public function create()
     {
-        $classes = ClassModel::all();
         $batches = Batch::all();
         $courses = Course::all();
         $designations = Designation::all();
-        return view('backend.teachers.create', compact('classes', 'courses', 'designations','batches'));
+        return view('backend.teachers.create', compact('courses', 'designations','batches'));
     }
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'father_name' => 'nullable|string|max:255',
@@ -44,7 +45,7 @@ class TeacherController extends Controller
             'qualification' => 'nullable|string',
             'experience' => 'nullable|integer',
             'date_of_join' => 'nullable|date',
-            'designation' => 'nullable|string',
+            'designation_id' => 'nullable',
         ]);
 
 
@@ -55,8 +56,8 @@ class TeacherController extends Controller
         $validated['image'] = 'uploads/courses/' . $fileName;
     }
  
-
-        Teacher::create($validated);
+//   dd($validated);
+            Teacher::create($validated);
         return redirect()->route('teachers.index')->with('success', 'Teacher added successfully');
     }
 
@@ -113,4 +114,5 @@ class TeacherController extends Controller
         $teacher->delete();
         return redirect()->route('teachers.index')->with('success', 'Teacher deleted successfully');
     }
+
 }

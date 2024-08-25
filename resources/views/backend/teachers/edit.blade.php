@@ -59,18 +59,13 @@
             <div class="col-md-6">
                 <label for="course_id">Course</label>
                 <select name="course_id" id="course_id" class="form-control">
-                    <!-- @foreach ($courses as $course)
-        <option value="{{ $course->id }}"
-            {{ (old('course_id') ?? $student->course_id ?? '') == $course->id ? 'selected' : '' }}>
-            {{ $course->name }}
-        </option>
-        @endforeach -->
-                    <option value="1">
-                        1
+                    @foreach ($courses as $course)
+                    <option value="{{ $course->id }}"
+                        {{ (old('course_id') ?? $student->course_id ?? '') == $course->id ? 'selected' : '' }}>
+                        {{ $course->name }}
                     </option>
-                    <option value="2">
-                        2
-                    </option>
+                    @endforeach
+
                 </select>
             </div>
 

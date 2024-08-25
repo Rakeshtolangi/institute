@@ -1,4 +1,3 @@
-<!-- resources/views/backend/fees/create.blade.php -->
 @extends('layouts.backend')
 
 @section('content')
@@ -19,7 +18,7 @@
                         <form action="{{ route('fees.store') }}" method="POST">
                             @csrf
                             @include('backend.fees._form')
-                            <!-- Hidden field for student fee -->
+                            
 
                             <button type="submit" class="btn btn-primary mt-3">Submit</button>
                         </form>

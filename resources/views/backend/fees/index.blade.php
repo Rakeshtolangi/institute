@@ -39,14 +39,14 @@
                     </select>
                 </div>
 
-           
+
             </div>
         </form>
             <div class="row mt-4">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header d-flex">
-                        
+
                         <div class="col-10">
                         <h4 class="card-title">Students</h4>
                         </div>
@@ -65,7 +65,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                            
+
                                     @foreach($students as $key => $student)
                                     <tr>
                                         <td>{{$key + 1 }}</td>
@@ -88,7 +88,7 @@
                                                             class="dropdown-item">Add Payment</a>
                                                         <a href=""
                                                             class="dropdown-item">view Payment</a>
-                                                    
+
                                                         <form action="{{ route('students.destroy', $student->id) }}"
                                                             method="POST">
                                                             @csrf
@@ -102,7 +102,7 @@
 
                                     </tr>
                                     @endforeach
-                            
+
 
                                 </tbody>
                             </table>
@@ -116,23 +116,3 @@
     </div>
 </div>
 @endsection
-<script>
-    function updateRadio() {
-        // Get the selected value from the dropdown
-        var selectedValue = document.getElementById('select-att').value;
-
-        // Loop through all students
-        @foreach($students as $key => $student)
-            // Get the radio buttons for each student
-            var presentRadio = document.getElementById('attendance-present-{{$key}}');
-            var absentRadio = document.getElementById('attendance-absent-{{$key}}');
-
-            // Check the radio button based on the selected value
-            if (selectedValue === 'present') {
-                presentRadio.checked = true;
-            } else if (selectedValue === 'absent') {
-                absentRadio.checked = true;
-            }
-        @endforeach
-    }
-</script>

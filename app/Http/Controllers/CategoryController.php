@@ -13,6 +13,17 @@ USE App\Models\Student;
 
 class CategoryController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:Category-list|Category-create|Category-edit|Controller-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Category-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Category-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Category-delete', ['only' => ['destroy']]);
+    }
+
+
    public function index()
    {
     $categories = Category::with('courses')->get();

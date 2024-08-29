@@ -9,6 +9,14 @@ use App\Models\Category;
 
 class CourseController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:Course-list|Course-create|Course-edit|Course-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Course-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Course-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Course-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

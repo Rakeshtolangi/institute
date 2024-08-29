@@ -9,6 +9,17 @@ use App\Models\Designation;
 
 class PayrollController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('permission:Payroll-list|Payroll-create|Payroll-edit|Payroll-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Payroll-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Payroll-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Payroll-delete', ['only' => ['destroy']]);
+    }
+
+
     public function create()
     {
         $designations = Designation::all();

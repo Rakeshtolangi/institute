@@ -11,10 +11,18 @@ use App\Models\Student;
 
 class DesignationController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:Designation-list|Designation-create|Designation-edit|Designation-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Designation-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Designation-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Designation-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $designations = Designation::all();
         return view('backend.designations.index', compact('designations'));

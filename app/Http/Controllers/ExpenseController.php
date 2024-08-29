@@ -14,6 +14,17 @@ use App\Models\ExpenseCategory;
 
 class ExpenseController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('permission:Expense-list|Expense-create|Expense-edit|Expense-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Expense-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Expense-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Expense-delete', ['only' => ['destroy']]);
+    }
+
+
     public function index()
     {
         $expenses = Expense::with('expenseCategory')->get();

@@ -24,7 +24,7 @@
                         <h4 class="card-title">Student Details</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('students.store') }}" method="POST">
+                        <form action="{{ route('students.store') }}" method="POST"  enctype="multipart/form-data">
                             @csrf
                             @include('backend.students._form')
 

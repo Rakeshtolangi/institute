@@ -95,7 +95,7 @@
                                                     <td>{{ $student->remaining_fee }}</td>
                                                     <td>{{ $student->return ?? 'N/A' }}</td>
                                                     <td>
-                                                        <a href="{{route('fees.index')}}">
+                                                        <a href="{{ route('fees.addpayment', $student->id) }}">
                                                             <i class="fas fa-dollar-sign"></i>
                                                         </a>
                                                         <a href="#">

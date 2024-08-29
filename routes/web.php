@@ -17,14 +17,21 @@ use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\FeesController;
 use App\Http\Controllers\FeesCategoryController;
 
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Auth::routes();
 
 
-// ExpenseCategoryController
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::group(['middleware' => ['auth']], function() {
+  
+  
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
 
 
 
@@ -48,13 +55,10 @@ Route::resource('payrolls', PayrollController::class);
 Route::resource('fees', FeesController::class);
 Route::resource('fees-categories', FeesCategoryController::class);
 
-Route::get('fees/student/{id}',[FeesController::class, 'addPayment'])->name('fees.addpayment');
+Route::get('fees/student/add-payment/{id}',[FeesController::class, 'addPayment'])->name('fees.addpayment');
+Route::get('fees/student/store-payment/{id}',[FeesController::class, 'storePayment'])->name('fees.storePayment');
 // Make a custom route for students
 
-Auth::routes();
-
-
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // custom routes are here
 Route::get('/attendance', [AttandanceController::class, 'index'])->name('attendance.index');
@@ -62,3 +66,8 @@ Route::post('/attendance', [AttandanceController::class, 'store'])->name('attend
 Route::get('/attendance/report', [AttandanceController::class, 'report'])->name('attendance.report');
 
 Route::get('/reports/fee', [StudentController::class, 'feeReport'])->name('reports.fee');
+
+});
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

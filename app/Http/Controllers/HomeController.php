@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Student;
-use App\Models\Batch;
 use App\Models\ClassModel;
-use App\Models\Course;  
-use App\Models\Teacher;  
-
+use App\Models\Course;
+use App\Models\Teacher;
+use App\Models\Shift;
+use App\Models\Batch;
+use App\Models\Student;
 
 class HomeController extends Controller
 {
@@ -17,10 +17,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        
+        $this->middleware('auth');
+    }
 
     /**
      * Show the application dashboard.

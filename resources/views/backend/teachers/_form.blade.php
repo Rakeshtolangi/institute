@@ -112,4 +112,10 @@
         <input type="date" name="date_of_join" id="date_of_join" class="form-control"
             value="{{ old('date_of_join', date('Y-m-d')) }}">
     </div>
+
+    <!-- docx upload section -->
+    <div class="col-md-6">
+        <label for="documents">Documents</label>
+        <input type="file" name="doc_file" id="documents" class="form-control" accept="pdf">
+    </div>
 </div>

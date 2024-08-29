@@ -51,16 +51,19 @@
                         <h4 class="card-title">Students</h4>
                         </div>
                         </div>
-                        <form action="{{ route('fees.store') }}" method="POST">
-                        @csrf
+                      
                         <div class="card-body">
                             <table class="datatables table table-striped" id="fees-table">
                                 <thead>
                                     <tr>
                                         <th>S.N.</th>
+                                        <th>Admission No.</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Mobile</th>
+                                        <th>Paid Amount</th>
+                                        <th>Due_amount</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -69,13 +72,17 @@
                                     @foreach($students as $key => $student)
                                     <tr>
                                         <td>{{$key + 1 }}</td>
+                                        <td>aa</td>
                                         <td>
-                                        <!-- <a href="{{ route('students.show', $student->id) }}">
+                                        <a href="{{ route('students.show', $student->id) }}">
                                             {{ $student->name }}
-                                        </a> -->
+                                        </a>
                                         </td>
                                         <td>{{ $student->email }}</td>
                                         <td>{{ $student->mobile }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td>
                                             <div class="btn-group dropstart">
                                                 <button type="button" class="btn dropdown-toggle"
@@ -84,8 +91,12 @@
                                                     <i class="fa fa-ellipsis-v"></i> </button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li>
-                                                        <a href="{{ route('fees.addpayment', $student->id) }}"
-                                                            class="dropdown-item">Add Payment</a>
+
+                                                   
+
+                                                    <a href="{{ route('fees.addpayment', $student->id) }}"
+                                                    class="dropdown-item">Add Payment</a>
+                                                
                                                         <a href=""
                                                             class="dropdown-item">view Payment</a>
 
@@ -109,7 +120,6 @@
                             <input type="hidden" name="course_id" id="" value="{{$selectedCourse}}">
                             <input type="hidden" name="batch_id" id="" value="{{$selectedBatch}}">
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>

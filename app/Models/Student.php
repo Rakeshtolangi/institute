@@ -14,6 +14,7 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = [
+       'admission_number',
         'name',
         'father_name',
         'dob',
@@ -21,6 +22,8 @@ class Student extends Model
         'mobile',
         'gender',
         'course_id',
+        'image',
+        'documents',
         'batch_id',
         'course_fee',
         'student_fee',
@@ -43,5 +46,9 @@ class Student extends Model
     public function shift()
     {
         return $this->belongsTo(Shift::class);
+    }
+    public function fees()
+    {
+        return $this->hasMany(Fee::class);
     }
 }

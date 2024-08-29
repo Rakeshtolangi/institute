@@ -10,6 +10,17 @@ use App\Models\FeesCategory;
 
 class FeesCategoryController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('permission:FeesCategory-list|FeesCategory-create|FeesCategory-edit|FeesCategory-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:FeesCategory-create', ['only' => ['create','store']]);
+        $this->middleware('permission:FeesCategory-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:FeesCategory-delete', ['only' => ['destroy']]);
+    }
+
+
     public function index()
     {
         $feesCategories = FeesCategory::all();

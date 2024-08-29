@@ -9,6 +9,11 @@
                 <div class="card">
                     <div class="card-body">
                         <h4>{{ $teacher->name }}</h4>
+                        <!-- <img src="{{asset($teacher->image)}}" alt="" srcset="" height="70px"
+                                                width="70px"> -->
+                        <img class="rounded-circle" alt="avatar1" src="{{asset($teacher->image)}}" srcset=""
+                            height="150px" width="150px" />
+
                         <p><strong>Email:</strong> {{ $teacher->email }}</p>
                         <p><strong>Phone:</strong> {{ $teacher->phone }}</p>
                         <p><strong>Gender:</strong> {{ ucfirst($teacher->gender) }}</p>
@@ -29,15 +34,18 @@
                         <!-- Nav Tabs -->
                         <ul class="nav nav-tabs" id="teacherTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="about-tab" data-bs-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>
+                                <a class="nav-link active" id="about-tab" data-bs-toggle="tab" href="#about" role="tab"
+                                    aria-controls="about" aria-selected="true">About</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                                <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab"
+                                    aria-controls="contact" aria-selected="false">Contact</a>
                             </li>
                         </ul>
                         <!-- Tab Content -->
                         <div class="tab-content" id="teacherTabContent">
-                            <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+                            <div class="tab-pane fade show active" id="about" role="tabpanel"
+                                aria-labelledby="about-tab">
                                 <h4>About</h4>
                                 <p>{{ $teacher->description ?? 'No additional information available.' }}</p>
                             </div>

@@ -72,6 +72,9 @@
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
+                       
+                       
+                        @canany('Dashboard')
                         <li class="nav-item active">
                             <a href="{{route('home')}}" class="collapsed" aria-expanded="false">
                                 <i class="fas fa-home"></i>
@@ -79,7 +82,7 @@
                             </a>
 
                         </li>
-
+                        @endcan
                         <li class="nav-item">
                             <!-- <a href="{{url('enquiries')}}">
                                 <i class=" fas fa-layer-group"></i>
@@ -120,6 +123,7 @@
                             </a>
                             <div class="collapse" id="sidebarLayouts">
                                 <ul class="nav nav-collapse">
+                                    
                                     <li>
                                         <a href="{{route('students.index')}}">
                                         <i class="fad fa-long-arrow-alt-right"></i>

@@ -7,6 +7,18 @@ use App\Models\Fee; // Assuming you have a Fee model
 
 class ReportController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('permission:Report-list|Report-create|Report-edit|Report-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Report-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Report-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Report-delete', ['only' => ['destroy']]);
+    }
+
+
     public function feeList(Request $request)
     {
         // Get filter inputs

@@ -1,4 +1,8 @@
 <div class="row g-3">
+    <div class="form-group col-md-6 mb-2">
+        <label for="admission_number">Admission No.</label>
+        <input type="text" name="admission_number" id="admission_number" class="form-control" value="{{ old('admission_number', $admission_number ?? '') }}" readonly>
+    </div>
     <div class="col-md-6 mb-2">
         <label for="name">Name</label>
         <input type="text" name="name" id="name" class="form-control" value="">
@@ -33,6 +37,18 @@
             <option value="female">>Female
             </option>
         </select>
+    </div>
+
+    <!-- image section -->
+    <div class="col-md-6">
+        <label for="image">Image</label>
+        <input type="file" name="image" id="image" class="form-control">
+    </div>
+
+    <!-- docx upload section -->
+    <div class="col-md-6">
+        <label for="documents">Documents</label>
+        <input type="file" name="doc_file" id="documents" class="form-control">
     </div>
 
     <div class="col-md-6 mb-2">

@@ -1,36 +1,59 @@
-<div class="form-group">
+<div class="col-md-5">
+    <div class="student-details" style="border:1px solid #ced4da; border-radius:5px; padding:10px;">
+
+
+    <h2>Student Details</h2>
+    <h5>Admission No.: {{$student->name}}</h5>
+    <h5>Name: {{$student->name}}</h5>
+    <h5>Course: {{$student->course->title}}</h5>
+    <h5>Batch: {{$student->batch->title}}</h5>
+    <h5>Shift: {{$student->name}}</h5>
+    </div>
+</div>
+<div class="col-md-7">
+<div class="form-group col-md-12">
     <label for="receipt_no">Receipt No.</label>
-    <input type="text" name="receipt_no" id="receipt_no" class="form-control" value="{{ old('receipt_no', $receipt_no ?? '') }}" readonly>
+    <input type="text" name="receipt_no" id="receipt_no" class="form-control" value="{{ old('receipt_no', $reciept_no ?? '') }}" readonly>
 </div>
 
-<div class="form-group">
+<div class="form-group col-md-12">
     <label for="fee_date">Fee Date</label>
-    <input type="date" name="fee_date" id="fee_date" class="form-control" value="{{ old('fee_date', $fee->fee_date ?? '') }}" required>
+    <input type="date" name="fee_date" id="fee_date" class="form-control" value="{{ old('fee_date', $fee_date ?? '') }}" required>
 </div>
 
-<div class="form-group">
-    <label for="batch_id">Batch</label>
-    <select name="batch_id" id="batch_id" class="form-control" required>
-        <option value="">-- Select Batch --</option>
-        @foreach($batches as $batch)
-            <option value="{{ $batch->id }}" {{ old('batch_id', $fee->batch_id ?? '') == $batch->id ? 'selected' : '' }}>
-                {{ $batch->title }}
-            </option>
-        @endforeach
-    </select>
-</div>
 
-<div class="form-group">
+
+
+
+<div class="form-group col-md-12">
     <label for="due_fee">Due Fee</label>
-    <input type="number" name="due_fee" id="due_fee" class="form-control" value="{{ old('due_fee', $fee->due_fee ?? 0) }}" required>
+    @php
+    // Determine the appropriate value to display based on whether the student has made a payment
+    if ($fee && ($fee->student_id ?? '') == "") {
+        // Student has not paid any amount, show the total student fee
+        $due_amount = $student->student_fee;
+    } elseif ($fee) {
+        // Student has made a payment, show the remaining due amount
+        $due_amount = $fee->due_fee; 
+    } else {
+        // No fee record exists, default to showing the total student fee
+        $due_amount = $student->student_fee;
+    }
+@endphp
+
+<!-- Display the due amount in the input field -->
+<input type="number" name="due_fee" id="due_fee" class="form-control" value="{{ $due_amount }}" required readonly>
+
 </div>
 
-<div class="form-group">
+<div class="form-group col-md-12">
     <label for="amount">Amount</label>
-    <input type="number" name="amount" id="amount" class="form-control" value="{{ old('amount', $fee->amount ?? 0) }}" required>
+    <input type="number" name="amount" id="amount" class="form-control" value="" required>
 </div>
 
-<div class="form-group">
+<div class="form-group col-md-12">
     <label for="remarks">Remarks</label>
-    <textarea name="remarks" id="remarks" class="form-control">{{ old('remarks', $fee->remarks ?? '') }}</textarea>
+    <textarea name="remarks" id="remarks" class="form-control">{{ old('remarks', $remarks ?? '') }}</textarea>
+</div>
+
 </div>

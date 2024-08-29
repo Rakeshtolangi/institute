@@ -12,6 +12,15 @@ use App\Models\Student;
 
 class ClassController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:Class-list|Class-create|Class-edit|Class-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Class-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Class-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Class-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $classes = ClassModel::with(['course', 'teachers', 'shift', 'batch'])->get();

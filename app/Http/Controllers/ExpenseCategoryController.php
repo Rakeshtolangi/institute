@@ -12,6 +12,13 @@ USE App\Models\Student;
 
 class ExpenseCategoryController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:ExpenseCategory-list|ExpenseCategory-create|ExpenseCategory-edit|ExpenseCategory-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:ExpenseCategory-create', ['only' => ['create','store']]);
+        $this->middleware('permission:ExpenseCategory-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:ExpenseCategory-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

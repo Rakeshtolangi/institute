@@ -12,12 +12,22 @@ use Illuminate\Support\Str;
 
 class FeesController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('permission:Fees-list|Fees-create|Fees-edit|Fees-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Fees-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Fees-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Fees-delete', ['only' => ['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $fees = Fee::all();
         $courses = Course::all();
         $batches = Batch::all();
 
@@ -38,7 +48,7 @@ class FeesController extends Controller
 
         $students = $query->get();
 
-        return view('backend.fees.index', compact('courses','batches', 'students', 'selectedCourse', 'selectedBatch','fees'));
+        return view('backend.fees.index', compact('courses','batches', 'students', 'selectedCourse', 'selectedBatch'));
     }
 
 
@@ -58,14 +68,14 @@ class FeesController extends Controller
 }
 
 
-public function addPayment($id)
+public function addPayment($id) 
 {
     $reciept_no = $this->generateUniqueId();
-    $batches = Batch::all(); // Fetch all batches
     $student = Student::findOrFail($id);
-    $fee = Fee::findOrFail($student->id);
-    // dd($student);
-    return view('backend.fees.create', compact('fee','reciept_no', 'batches','student'));
+    $fee = $student->fees()->latest()->first(); // Adjust as needed to get the correct fee
+
+    // dd($fee);
+    return view('backend.fees.create', compact('reciept_no', 'student','fee'));
 }
 
     // Generate random unique number
@@ -75,55 +85,60 @@ public function addPayment($id)
     $randomString = Str::upper(Str::random(5)); // Generates a 5-character alphanumeric string
     return "IMS-{$date}-{$randomString}";
 }
+public function storePayment($id){
+
+}
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        // Validate the incoming request
         $validated = $request->validate([
-            'receipt_no' => 'required|unique:fees',
-            'fee_date' => 'required|date',
-            'batch_id' => 'required|exists:batches,id',
-            'due_fee' => 'required|numeric',
-            'amount' => 'required|numeric',
-            'remarks' => 'nullable|string',
-            'student_fee' => 'required|numeric', 
+            'receipt_no' => 'required',
+            'fee_date' => 'required',
+            'student_id' => 'required',
+            'course_id' => 'required',
+            'shift_id' => 'required',
+            'batch_id' => 'required',
+            'amount' => 'required|numeric|min:0',
+            'remarks' => 'nullable',
         ]);
-
-        // Create a new fee record
-    Fee::create([
-        'receipt_no' => $validated['receipt_no'],
-        'fee_date' => $validated['fee_date'],
-        'batch_id' => $validated['batch_id'],
-        'due_fee' => $dueFee, // Use student_fee as due_fee
-        'amount' => $validated['amount'],
-        'remaining_fee' => $dueFee - $validated['amount'], // Calculate remaining fee
-        'remarks' => $validated['remarks'],
-
-        // case-1
-        // 1000 = 1000
-        // due_fee = student_fee
-        // amount_pay = student_fee 
-        //paid_amount = total_studnent_amount
-
-        // case-2
-        // 1000 - 4000 = 6000 -> deu_fee
-
-        // amount = 4000
-        // due_amount = student_fee - amount
-        //  paid_amount = amount
-
-        // amount = 3000 
-        // paid_amount = deu_amount- amount
-        // paid = amount
-
     
+        // Find the existing fee record for the student
+        $fee = Fee::where('student_id', $request->student_id)->latest()->first();
+        $paid_amount = 0;
 
-    ]);
+        if (!$fee) {
+            // First payment scenario, calculate due amount from the total student fee
+            $student_fee = $request->student_fee; // Assuming $request->student_fee is passed correctly
+            $due_amount = max(0, $student_fee - $request->amount);
+            $paid_amount = $paid_amount + $request->amount; 
+        } else {
+            // Subsequent payment scenario, calculate due amount from the remaining due fee
+            $due_amount = max(0, $fee->due_fee - $request->amount);
+            $paid_amount = $fee->paid_amount + $request->amount; 
 
+        }
+    
+        // Create the new fee record
+        Fee::create([
+            'student_id' => $validated['student_id'],
+            'receipt_no' => $validated['receipt_no'],
+            'fee_date' => $validated['fee_date'],
+            'batch_id' => $request->batch_id,
+            'amount' => $validated['amount'],
+            'paid_amount' => $paid_amount, // Store the updated paid amount
+            'due_fee' => $due_amount, // Store the updated due amount
+            'remarks' => $validated['remarks'],
+            'course_id' => $request->course_id,
+            'shift_id' => $request->shift_id,
+        ]);
+    
         return redirect()->route('fees.index')->with('success', 'Fee record created successfully.');
     }
+    
 
     /**
      * Display the specified resource.

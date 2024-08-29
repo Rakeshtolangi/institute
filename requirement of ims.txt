@@ -48,10 +48,10 @@ sat, Aug, 10 requirements
 
 
 1st draft requirements. (aug 21)
-        make the attachment file section on the teacher/student
+On Going > make the attachment file section on the teacher/student
 Done > remove the section master.
 Done >  add all the category to their respective category elements
-on going > determined the fee category
+done> determined the fee category
         make a proper visualized border
 change the icon in expenses table
         remove all the dollar signs na make them nepali rupees

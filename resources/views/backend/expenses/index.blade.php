@@ -45,9 +45,14 @@
                                         <td>{{ $expense->expenseCategory->title }}</td>
                                         <td>{{ $expense->amount }}</td>
                                         <td>{{ $expense->description }}</td>
-                                        <td>
+                                        <!-- <td>
                                             
                                             <img src="{{asset($expense->image )}}" alt="" srcset="">
+                                        </td> -->
+                                        <td>
+
+                                            <img src="{{asset($expense->image)}}" alt="" srcset="" height="70px"
+                                                width="70px">
                                         </td>
                                         <td>
                                             <div class="btn-group dropstart">

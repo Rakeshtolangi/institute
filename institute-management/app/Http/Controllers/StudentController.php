@@ -8,13 +8,22 @@ use App\Models\ClassModel;
 use App\Models\Course;  
 use App\Models\Category;
 use App\Models\Batch;
-
-
+use Illuminate\Support\Str;
 
 class StudentController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('permission:Student-list|Student-create|Student-edit|Student-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Student-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Student-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Student-delete', ['only' => ['destroy']]);
+    }
+
+
     public function index()
-    
     {
         $students = Student::latest()->get();
         return view('backend.students.index', compact('students'));
@@ -26,41 +35,68 @@ class StudentController extends Controller
         // $classes = ClassModel::all();
         $courses = Course::all();
         $batches = Batch::all();
+        $admission_number = $this->generateUniqueId();
 
- 
-        return view('backend.students.create', compact('courses','batches'));
+
+        return view('backend.students.create', compact('courses','batches','admission_number'));
     }
 
-    public function store(Request $request)
-    {
-        // dd($request->all());
-        $validated = $request->validate([
-            //adding this to check if data is being received correctly
     
-            'name' => 'required|string|max:255',
-            'father_name' => 'required|string|max:255',
-            'dob' => 'required|date',
-            'email' => 'required|email|max:255',
-            'mobile' => 'required|string|max:15',
-            'gender' => 'required|in:male,female',
-             'course_id' => 'required',
-            'batch_id' => 'required',
-
-            'course_fee' => 'required',
-            'student_fee' => 'required',
-        ]); 
-        // dd($validated);
-
-        Student::create($validated);
-
-        return redirect()->route('students.index')->with('success', 'Student added successfully!');
+    // Generate random unique number
+    private function generateUniqueId()
+    {
+        $date = date('Ymd');
+        $randomString = Str::upper(Str::random(5)); // Generates a 5-character alphanumeric string
+        return "ADM-{$date}-{$randomString}";
     }
+
+
+public function store(Request $request)
+{
+    $validated = $request->validate([    
+        'admission_number' => 'required',
+        'name' => 'required|string|max:255',
+        'father_name' => 'required|string|max:255',
+        'dob' => 'required|date',
+        'email' => 'required|email|max:255',
+        'mobile' => 'required|string|max:15',
+        'gender' => 'required|in:male,female',
+        'course_id' => 'required',
+        'batch_id' => 'required',
+        'image' => 'nullable|image|max:2048',  
+        // 'doc_file' => 'required|file|max:2048',
+        
+        // Assuming file type
+        'course_fee' => 'required',
+        'student_fee' => 'required',
+    ]); 
+
+    // Handle file upload if an image is provided
+    if ($request->hasFile('image')) {
+        $imageFileName = time() . '_' . uniqid() . '.' . $request->image->extension();  
+        $request->image->move(public_path('uploads/students'), $imageFileName);
+        $validated['image'] = 'uploads/students/' . $imageFileName;
+    }
+
+    // Handle document upload if provided
+    // if ($request->hasFile('doc_file')) {
+    //     $docFileName = time() . '_' . uniqid() . '.' . $request->doc_file->extension();  
+    //     $request->doc_file->move(public_path('uploads/students/documents'), $docFileName);
+    //     $validated['doc_file'] = 'uploads/students/documents/' . $docFileName;
+    // }
+    
+    Student::create($validated);
+
+    return redirect()->route('students.index')->with('success', 'Student added successfully!');
+}
+
 
 
     
     public function show(Student $student)
     {  
-        return view('backend.students.show', compact('student'));
+        
+        return view('backend.students.s_profile', compact('student'));
     }
 
 
@@ -76,9 +112,11 @@ class StudentController extends Controller
 
     public function update(Request $request, Student $student)
     {
+    
+        // dd($request->all());
         $validated = $request->validate([
             //adding this to check if data is being received correctly
-    
+            'admission_number' => 'required',
             'name' => 'required|string|max:255',
             'father_name' => 'required|string|max:255',
             'dob' => 'required|date',
@@ -86,11 +124,27 @@ class StudentController extends Controller
             'mobile' => 'required|string|max:15',
             'gender' => 'required|in:male,female',
             'course_id' => 'required',
+            'image' => 'nullable',  
+            'doc_file' => 'nullable|file|mimes:jpg,png,pdf|max:2048',  
             'batch_id' => 'required',
             'course_fee' => 'required',
             'student_fee' => 'required',
         ]);
-       
+
+        // Handle file upload if an image is provided
+        if ($request->hasFile('image')) {
+            $fileName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('uploads/students/profile'), $fileName);
+            $validated['image'] = 'uploads/students/profile/' . $fileName;
+        }
+
+
+         // Handle Documents upload if an image is provided
+         if ($request->hasFile('doc_file')) {
+            $docName = $request->doc_file->extension();  
+            $request->doc_file->move(public_path('uploads/students/documents'), $docName);
+            $validated['doc_file'] = 'uploads/students/documents/' . $docName;
+        }
         
         $student->update($validated);
 
@@ -122,10 +176,13 @@ public function feeReport(Request $request)
     $totalPaidFee = $students->sum('paid_fee');  // Assuming you have a `paid_fee` column
     $totalDueFee = $totalStudentFee - $totalPaidFee;
 
+    
     return view('backend.reports.fee_report', compact(
         'students', 'totalCourseFee', 'totalStudentFee', 'totalPaidFee', 'totalDueFee'
-    ));
+    ));  
 }
+
+
 
     
 // enquiry form student model

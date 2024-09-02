@@ -64,7 +64,21 @@
                                             Female</option>
                                     </select>
                                 </div>
-                           
+                             <!-- image section -->
+                                
+                             
+                             
+                             
+                             <div class="col-md-6">
+                                    <label for="image">Image</label>
+                                    <input type="file" name="image" id="image" class="form-control">
+                                </div>
+
+                                <!-- docx upload section -->
+                                <div class="col-md-6">
+                                    <label for="documents">Documents</label>
+                                    <input type="file" name="doc_file" id="documents" class="form-control">
+                                </div>
                                 <div class="col-md-6">
                                     <label for="course_id">Course</label>
                                     <select name="course_id" id="course_id" class="form-control">

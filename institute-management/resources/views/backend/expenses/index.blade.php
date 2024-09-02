@@ -1,3 +1,4 @@
+<!-- resources/views/backend/expenses/index.blade.php -->
 @extends('layouts.backend')
 
 @section('content')
@@ -18,7 +19,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Expense List</h4>
+                        <h4 class="card-title">Expense Lists</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -26,38 +27,43 @@
                                 <thead>
                                     <tr>
                                         <th>S.N.</th>
-                                        <th>Expense Date</th>
+                                        <th>Date</th>
                                         <th>Title</th>
                                         <th>Category</th>
                                         <th>Amount</th>
                                         <th>Description</th>
+                                        <th>File</th>
                                         <th class="no-sorting">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($expenses as $key => $expense)
                                     <tr>
-                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $key  + 1 }}</td>
                                         <td>{{ $expense->expense_date }}</td>
                                         <td>{{ $expense->title }}</td>
-                                        <td>{{ $expense->category }}</td>
+                                        <td>{{ $expense->expenseCategory->title }}</td>
                                         <td>{{ $expense->amount }}</td>
                                         <td>{{ $expense->description }}</td>
+                                        <!-- <td>
+                                            
+                                            <img src="{{asset($expense->image )}}" alt="" srcset="">
+                                        </td> -->
+                                        <td>
+
+                                            <img src="{{asset($expense->image)}}" alt="" srcset="" height="70px"
+                                                width="70px">
+                                        </td>
                                         <td>
                                             <div class="btn-group dropstart">
-                                                <button type="button" class="btn dropdown-toggle"
-                                                    data-bs-toggle="dropdown" aria-haspopup="false"
-                                                    aria-expanded="false">
+                                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
                                                     <i class="fa fa-ellipsis-v"></i>
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li>
-                                                        <a href="{{ route('expenses.show', $expense->id) }}"
-                                                            class="dropdown-item">View</a>
-                                                        <a href="{{ route('expenses.edit', $expense->id) }}"
-                                                            class="dropdown-item">Edit</a>
-                                                        <form action="{{ route('expenses.destroy', $expense->id) }}"
-                                                            method="POST">
+                                                        <a href="{{ route('expenses.show', $expense->id) }}" class="dropdown-item">View</a>
+                                                        <a href="{{ route('expenses.edit', $expense->id) }}" class="dropdown-item">Edit</a>
+                                                        <form action="{{ route('expenses.destroy', $expense->id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="dropdown-item">Delete</button>

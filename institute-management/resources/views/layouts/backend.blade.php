@@ -34,11 +34,35 @@
     <link rel="stylesheet" href="{{asset('assets/css/plugins.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/kaiadmin.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/customCss.css')}}" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        .form-control{
-            border-color:#d0d0d0e3 !important;
-        }
+    .form-control {
+        border-color: #d0d0d0e3 !important;
+    }
+
+    .sub-item::before {
+
+        font-family: 'FontAwesome';
+        content: "\f178" !important;
+        display: inline-block;
+        top: 0 !important;
+        background: none !important;
+
+
+    }
+
+    .sidebar .nav-collapse li a {
+        padding: 1px 25px !important;
+    }
+
+    .sidebar .nav-collapse,
+    .sidebar[data-background-color=white] .nav-collapse {
+        margin-top: 0;
+        margin-bottom: 5px;
+        padding-bottom: 5px;
+        padding-top: 0px;
+        padding-left: 40px !important;
+    }
     </style>
 </head>
 
@@ -72,19 +96,13 @@
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
+
                         <li class="nav-item active">
                             <a href="{{route('home')}}" class="collapsed" aria-expanded="false">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                             </a>
 
-                        </li>
-
-                        <li class="nav-item">
-                            <!-- <a href="{{url('enquiries')}}">
-                                <i class=" fas fa-layer-group"></i>
-                                <p>Enquires</p>
-                            </a> -->
                         </li>
 
                         <li class="nav-item">
@@ -118,6 +136,7 @@
                             </a>
                             <div class="collapse" id="sidebarLayouts">
                                 <ul class="nav nav-collapse">
+
                                     <li>
                                         <a href="{{route('students.index')}}">
                                             <span class="sub-item">List Students</span>
@@ -170,6 +189,11 @@
                                             <span class="sub-item">Add Course</span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{{route('categories.index')}}">
+                                            <span class="sub-item">Course Category</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -203,44 +227,17 @@
                             </a>
                         </li>
 
-                        <!-- categories dropdown -->
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarLayoutsCategories">
-                                <i class="fas fa-pencil-alt"></i>
-                                <p>Masters</p>
-                                <span class="caret"></span>
-                            </a>
-                            <div class="collapse" id="sidebarLayoutsCategories">
-                                <ul class="nav nav-collapse">
-                                    <li>
-                                        <a href="{{route('categories.index')}}">
-                                            <span class="sub-item">Course Category</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{route('designations.index')}}">
-                                            <span class="sub-item">Designation</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{route('expense-categories.index')}}">
-                                            <span class="sub-item">Expenses Category</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+
                         <!-- HRM dropdown -->
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarLayoutsHRM">
                                 <i class="fas fa-sitemap"></i>
                                 <p>HRM</p>
-                                <span class="caret"></span>
                             </a>
                             <div class="collapse" id="sidebarLayoutsHRM">
                                 <ul class="nav nav-collapse">
                                     <li>
-                                        <a href="#">
+                                        <a href="{{route('payrolls.create')}}">
                                             <span class="sub-item">Payroll</span>
                                         </a>
                                     </li>
@@ -248,85 +245,98 @@
                             </div>
                         </li>
 
+                        <!--Fees dropdown -->
                         <li class="nav-item">
-                            <a href="{{route('expenses.create')}}">
-                                <i class="fas fa-dollar-sign"></i>
-                                <p>Expenses</p>
-                            </a>
-                        </li>
+                            <a data-bs-toggle="collapse" href="#sidebarLayoutsfees">
 
-                        <li class="nav-item">
-                            <a href="widgets.html">
-                                <i class="fas fa-desktop"></i>
-                                <p>Reports</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="widgets.html">
-                                <i class="fas fa-desktop"></i>
-                                <p>Widgets</p>
-                                <span class="badge badge-success">4</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../../documentation/index.html">
-                                <i class="fas fa-file"></i>
-                                <p>Documentation</p>
-                                <span class="badge badge-secondary">1</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#submenu">
-                                <i class="fas fa-bars"></i>
-                                <p>Menu Levels</p>
+                                <!-- <i class="bi bi-currency-rupee"></i> -->
+                                <i class='fas fa-rupee-sign'></i>
+                                <p>Collect Fees</p>
                                 <span class="caret"></span>
+
                             </a>
-                            <div class="collapse" id="submenu">
+                            <div class="collapse" id="sidebarLayoutsfees">
                                 <ul class="nav nav-collapse">
                                     <li>
-                                        <a data-bs-toggle="collapse" href="#subnav1">
-                                            <span class="sub-item">Level 1</span>
-                                            <span class="caret"></span>
+                                        <a href="{{route('fees.index')}}">
+                                            <span class="sub-item">Fees</span>
                                         </a>
-                                        <div class="collapse" id="subnav1">
-                                            <ul class="nav nav-collapse subnav">
-                                                <li>
-                                                    <a href="#">
-                                                        <span class="sub-item">Level 2</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <span class="sub-item">Level 2</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </li>
                                     <li>
-                                        <a data-bs-toggle="collapse" href="#subnav2">
-                                            <span class="sub-item">Level 1</span>
-                                            <span class="caret"></span>
+                                        <a href="{{route('fees-categories.create')}}">
+                                            <span class="sub-item">Fees Category</span>
                                         </a>
-                                        <div class="collapse" id="subnav2">
-                                            <ul class="nav nav-collapse subnav">
-                                                <li>
-                                                    <a href="#">
-                                                        <span class="sub-item">Level 2</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="sub-item">Level 1</span>
+
+                                </ul>
+                            </div>
+                        </li>
+
+                        <!-- Expenses dropdown -->
+                        <li class="nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarLayoutsCategories">
+                                <i class="fas fa-pencil-alt"></i>
+                                <p>Expenses</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="sidebarLayoutsCategories">
+                                <ul class="nav nav-collapse">
+                                    <li class="nav-item">
+                                        <a href="{{route('expenses.index')}}">
+                                            <span class="sub-item">Expenses</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('expense-categories.index')}}">
+                                            <span class="sub-item">Expense Category</span>
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
+
+                        <!-- Designations -->
+                        <li class="nav-item">
+                            <a href="{{route('designations.index')}}">
+                                <i class="fas fa-desktop"></i>
+                                <span class="">Designation</span>
+                            </a>
+                        </li>
+
+                        <!-- Settings -->
+                        <li class="nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarLayoutsSetting">
+                                <i class="fas fa-gear"></i>
+                                <p>Settings</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="sidebarLayoutsSetting">
+                                <ul class="nav nav-collapse">
+                                    <li class="nav-item">
+                                        <a href="">
+                                            <span class="sub-item">System Settings</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="">
+                                            <span class="sub-item">Users</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('roles.index')}}">
+                                            <span class="sub-item">Role</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="">
+                                            <span class="sub-item">Permission</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+
                     </ul>
                 </div>
             </div>

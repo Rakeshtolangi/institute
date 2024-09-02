@@ -11,6 +11,14 @@ USE App\Models\Category;
 
 class BatchController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:batch-list|batch-create|batch-edit|batch-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:batch-create', ['only' => ['create','store']]);
+        $this->middleware('permission:batch-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:batch-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

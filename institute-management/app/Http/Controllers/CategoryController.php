@@ -7,11 +7,23 @@ use App\Models\Course;
 use App\Models\Teacher;
 use App\Models\ClassModel;
 USE App\Models\Category;
+USE App\Models\Student;
 
 
 
 class CategoryController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:Category-list|Category-create|Category-edit|Controller-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Category-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Category-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Category-delete', ['only' => ['destroy']]);
+    }
+
+
    public function index()
    {
     $categories = Category::with('courses')->get();
@@ -30,15 +42,12 @@ class CategoryController extends Controller
    
    {
     $validated = $request->validate([
-
         'name' => 'required|string|max:255',
         'description' => 'required',
        ]);
        
        Category::create($validated);
-    
        return redirect() -> route('categories.index')->with('success','Category added successfully!');
-    
    }
 
    

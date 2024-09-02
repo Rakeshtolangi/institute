@@ -3,59 +3,94 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Expense; // Ensure you use the correct model
+use App\Models\Expense;
+use App\Models\Designation;
+use App\Models\Course;
+use App\Models\Category;
+use App\Models\Teacher;
+use App\Models\Student;
+use App\Models\ExpenseCategory;
 
-class ExpenseCategoryController extends Controller
+
+class ExpenseController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('permission:Expense-list|Expense-create|Expense-edit|Expense-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Expense-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Expense-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Expense-delete', ['only' => ['destroy']]);
+    }
+
+
     public function index()
     {
-        $expenseCategories = ExpenseCategory::all();
-        return view('backend.expense_categories.index', compact('expenseCategories'));
+        $expenses = Expense::with('expenseCategory')->get();
+        return view('backend.expenses.index', compact('expenses'));
     }
 
     public function create()
+{
+    $expenseCategories = ExpenseCategory::all();
+    return view('backend.expenses.create', compact('expenseCategories'));
+}
+
+public function store(Request $request)
+{
+    // dd($request->all());
+    $validated = $request->validate([
+        'expense_date' => 'required|date',
+        'title' => 'required|string|max:255',
+        'expense_category_id' => 'required|exists:expense_categories,id',
+        'amount' => 'required|numeric',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        'description' => 'nullable|string',
+    ]);
+
+       if ($request->hasFile('image')) {
+            $fileName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('uploads/expenses'), $fileName);
+            $validated['image'] = 'uploads/expeses/' . $fileName;
+        }
+
+    Expense::create($validated);
+
+    return redirect()->route('expenses.index')->with('success', 'Expense added successfully!');
+}
+
+    public function show(Expense $expense)
     {
-        return view('backend.expense_categories.create'); // Ensure the path matches the view file
+        return view('backend.expenses.show', compact('expense'));
     }
 
-    public function store(Request $request)
+    public function edit(Expense $expense)
+{
+    $expenseCategories = ExpenseCategory::all();
+    return view('backend.expenses.edit', compact('expense', 'expenseCategories'));
+}
+
+public function update(Request $request, Expense $expense)
+{
+    $validated = $request->validate([
+        'expense_date' => 'required|date',
+        'title' => 'required|string|max:255',
+        'expense_category_id' => 'required|exists:expense_categories,id', // Validate and include the category ID
+        'amount' => 'required|numeric',
+        'file' => 'nullable|string',
+        'description' => 'nullable|string',
+    ]);
+
+    $expense->update($validated);
+
+    return redirect()->route('expenses.index')->with('success', 'Expense updated successfully!');
+}
+
+    public function destroy(Expense $expense)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ]);
+        $expense->delete();
 
-        ExpenseCategory::create($validated);
-
-        return redirect()->route('expense-categories.index')->with('success', 'Expense Category added successfully!');
-    }
-
-    public function show(ExpenseCategory $expenseCategory) // Changed from Expense to ExpenseCategory
-    {
-        return view('backend.expense_categories.show', compact('expenseCategory')); // Ensure the path matches the view file
-    }
-
-    public function edit(ExpenseCategory $expenseCategory)
-    {
-        return view('backend.expense_categories.edit', compact('expenseCategory')); // Changed view path to edit
-    }
-
-    public function update(Request $request, ExpenseCategory $expenseCategory)
-    {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ]);
-
-        $expenseCategory->update($validated);
-
-        return redirect()->route('expense-categories.index')->with('success', 'Expense Category updated successfully!');
-    }
-
-    public function destroy(ExpenseCategory $expenseCategory)
-    {
-        $expenseCategory->delete();
-
-        return redirect()->route('expense-categories.index')->with('success', 'Expense Category deleted successfully!');
+        return redirect()->route('expenses.index')->with('success', 'Expense deleted successfully!');
     }
 }

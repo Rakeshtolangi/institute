@@ -12,6 +12,24 @@
             <p>{{ $message }}</p>
         </div>
         @endif
+
+
+        <?php
+        $id = $id ?? null;
+
+
+        ?>
+
+        @if (isset($id))
+        {!! Form::model($data, [
+            'route' => ['location.index', $id],
+            'method' => 'patch',
+            'enctype' => 'multipart/form-data',
+            ])!!}
+
+        @else{ Form ::open (['location.store'], 'method'=>'post', 'enctype' => 'multipart/form-data') !! }
+        @endif
+
         <div class="row">
             <!-- Add Designation Form (40% width) -->
             <div class="col-md-4">
@@ -20,7 +38,6 @@
                         <h4 class="card-title">Add Designation</h4>
                     </div>
 
-                    
                     <div class="card-body">
                     <form action="{{ isset($designation) ? route('designations.update', $designation->id) : route('designations.store') }}" method="POST">
                     @csrf

@@ -1,3 +1,4 @@
+<!-- resources/views/backend/expenses/create.blade.php -->
 @extends('layouts.backend')
 
 @section('content')
@@ -8,6 +9,7 @@
             <div class="float-right">
                 <a href="{{ route('expenses.index') }}" class="btn btn-primary">List Expenses</a>
             </div>
+
             @if ($message = Session::get('success'))
             <div class="alert alert-success">
                 <p>{{ $message }}</p>
@@ -21,10 +23,10 @@
                         <h4 class="card-title">Expense Details</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('expenses.store') }}" method="POST">
+                        <form action="{{ route('expenses.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @include('backend.expenses._form')
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
                         </form>
                     </div>
                 </div>

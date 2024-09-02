@@ -11,6 +11,17 @@ USE App\Models\Category;
 
 class ShiftController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('permission:Shift-list|Shift-create|Shift-edit|Shift-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Shift-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Shift-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Shift-delete', ['only' => ['destroy']]);
+    }
+
+    
     public function index()
     {
         $shifts = Shift::all();

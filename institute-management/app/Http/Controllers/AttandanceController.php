@@ -10,6 +10,14 @@ use App\Models\Batch;
 use Illuminate\Http\Log;
 class AttandanceController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:Attendance-list|Attendance-create|Attendance-edit|Attendance-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Attendance-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Attendance-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Attendance-delete', ['only' => ['destroy']]);
+    }
     public function index(Request $request)
     {
         $courses = Course::all();

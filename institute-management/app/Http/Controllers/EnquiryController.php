@@ -9,6 +9,15 @@ USE App\Models\Category;
 
 class EnquiryController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('permission:Enquiry-list|Enquiry-create|Enquiry-edit|Enquiry-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Enquiry-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Enquiry-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Enquiry-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

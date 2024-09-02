@@ -1,4 +1,4 @@
-<!-- create.blade.php -->
+<!-- resources/views/backend/teachers/create.blade.php -->
 @extends('layouts.backend')
 
 @section('content')
@@ -9,7 +9,6 @@
             <h3 class="fw-bold mb-3">Add Teacher</h3>
             <div class="float-right">
                 <a href="{{ route('teachers.index') }}" class="btn btn-primary">List Teacher</a>
-
             </div>
             @if ($message = Session::get('success'))
             <div class="alert alert-success">
@@ -24,10 +23,10 @@
                         <h4 class="card-title">Teacher Details</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('teachers.store') }}" method="POST">
+                        <form action="{{ route('teachers.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @include('backend.teachers._form')
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
                         </form>
                     </div>
 

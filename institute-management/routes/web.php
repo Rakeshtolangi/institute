@@ -18,8 +18,8 @@ use App\Http\Controllers\FeesController;
 use App\Http\Controllers\FeesCategoryController;
 
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
-
 
 Auth::routes();
 
@@ -70,6 +70,7 @@ Route::get('/attendance/report', [AttandanceController::class, 'report'])->name(
 Route::get('/reports/fee', [StudentController::class, 'feeReport'])->name('reports.fee');
 
 Route::resource('roles', RoleController::class);
+Route::resource('permissions', PermissionController::class);
 
 });
 Auth::routes();

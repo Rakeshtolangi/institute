@@ -1,55 +1,68 @@
-@extends('layouts.app')
+<!-- resources/views/courses/edit.blade.php -->
+@extends('layouts.backend')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Edit Role</h2>
+<div class="container">
+    <div class="page-inner">
+    <div class="page-header">
+            <h3 class="fw-bold mb-3">Manage Roles</h3>
+            <div class="float-right">
+                <a href="{{ route('roles.index') }}" class="btn btn-primary">List Roles</a>
+            </div>
         </div>
-        <div class="pull-right">
-            <a class="btn btn-primary btn-sm mb-2" href="{{ route('roles.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+        @endif
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                <div class="card-header">
+                        <h4 class="card-title">Update Role</h4>
+                    </div>
+                    <div class="card-body">
+                    <form action="{{ route('roles.update', $role->id) }}" method="post">
+                    @csrf
+                    @method("PUT")
+
+                    <div class="mb-3 row">
+                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Name</label>
+                        <div class="col-md-6">
+                          <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $role->name }}">
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="permissions" class="col-md-4 col-form-label text-md-end text-start">Permissions</label>
+                        <div class="col-md-6">           
+                            <select class="form-select @error('permissions') is-invalid @enderror" multiple aria-label="Permissions" id="permissions" name="permissions[]" style="height: 210px;">
+                                @forelse ($permissions as $permission)
+                                    <option value="{{ $permission->id }}" {{ in_array($permission->id, $rolePermissions ?? []) ? 'selected' : '' }}>
+                                        {{ $permission->name }}
+                                    </option>
+                                @empty
+
+                                @endforelse
+                            </select>
+                            @error('permissions')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 row">
+                        <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Update Role">
+                    </div>
+                    
+                </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-        <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-        </ul>
-    </div>
-@endif
-
-<form method="POST" action="{{ route('roles.update', $role->id) }}">
-    @csrf
-    @method('PUT')
-
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Name:</strong>
-                <input type="text" name="name" placeholder="Name" class="form-control" value="{{ $role->name }}">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Permission:</strong>
-                <br/>
-                @foreach($permission as $value)
-                    <label><input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name" {{ in_array($value->id, $rolePermissions) ? 'checked' : ''}}>
-                    {{ $value->name }}</label>
-                <br/>
-                @endforeach
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btn-primary btn-sm mb-3"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
-        </div>
-    </div>
-</form>
-
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection

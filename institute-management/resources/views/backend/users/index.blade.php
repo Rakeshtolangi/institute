@@ -1,29 +1,13 @@
 @extends('layouts.backend')
-<style>
-    .ul-lists{
-        list-style:none;
-    }
-    .ul-lists li{
-        display:inline-block !important;
-        margin-bottom:5px;
-    }
-    .li-items{
-        background: #83adff;
-    color: white;
-    border-radius: 5px;
-    width: fit-content;
-    padding: 0px 5px 0 5px;
-    }
-     
-</style>
+
 @section('content')
 
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Manage Roles</h3>
+            <h3 class="fw-bold mb-3">Manage Users</h3>
             <div class="float-right">
-                <a href="{{ route('roles.create') }}" class="btn btn-primary">Add Role</a>
+                <a href="{{ route('users.create') }}" class="btn btn-primary">Add User</a>
             </div>
         </div>
         @session('success')
@@ -35,7 +19,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Role Lists</h4>
+                        <h4 class="card-title">User Lists</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -43,40 +27,48 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">S.N</th>
-                                        <th scope="col">Role Name</th>
-                                        <th scope="col">Permissions</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Role</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($roles as $role)
+                                    @forelse ($users as $user)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $role->name }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
                                         <td>
-                                            <ul class="ul-lists">
-                                                @forelse ($role->permissions as $permission)
-                                                <li class="li-items">{{ $permission->name }}</li>
+                                            <ul>
+                                                @forelse ($user->getRoleNames() as $role)
+                                                <li>{{ $role }}</li>
                                                 @empty
                                                 @endforelse
                                             </ul>
                                         </td>
                                         <td>
-                                            <form action="{{ route('roles.destroy', $role->id) }}" method="post">
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
 
-                                                @if ($role->name!='Super Admin')
-                                                @can('edit-role')
-                                                <a href="{{ route('roles.edit', $role->id) }}"
+                                                @if (in_array('Super Admin', $user->getRoleNames()->toArray() ?? []) )
+                                                @if (Auth::user()->hasRole('Super Admin'))
+                                                <a href="{{ route('users.edit', $user->id) }}"
+                                                    class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i>
+                                                    Edit</a>
+                                                @endif
+                                                @else
+                                                @can('edit-user')
+                                                <a href="{{ route('users.edit', $user->id) }}"
                                                     class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i>
                                                     Edit</a>
                                                 @endcan
 
-                                                @can('delete-role')
-                                                @if ($role->name!=Auth::user()->hasRole($role->name))
+                                                @can('delete-user')
+                                                @if (Auth::user()->id!=$user->id)
                                                 <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Do you want to delete this role?');"><i
+                                                    onclick="return confirm('Do you want to delete this user?');"><i
                                                         class="bi bi-trash"></i> Delete</button>
                                                 @endif
                                                 @endcan
@@ -86,9 +78,9 @@
                                         </td>
                                     </tr>
                                     @empty
-                                    <td colspan="3">
+                                    <td colspan="5">
                                         <span class="text-danger">
-                                            <strong>No Role Found!</strong>
+                                            <strong>No User Found!</strong>
                                         </span>
                                     </td>
                                     @endforelse
@@ -101,19 +93,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @endsection

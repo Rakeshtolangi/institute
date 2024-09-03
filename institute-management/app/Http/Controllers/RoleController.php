@@ -64,8 +64,7 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Role $role): View
-    {
+    public function edit(Role $role){
         if($role->name=='Super Admin'){
             abort(403, 'SUPER ADMIN ROLE CAN NOT BE EDITED');
         }
@@ -74,7 +73,7 @@ class RoleController extends Controller
             ->pluck('permission_id')
             ->all();
 
-        return view('roles.edit', [
+        return view('backend.roles.edit', [
             'role' => $role,
             'permissions' => Permission::get(),
             'rolePermissions' => $rolePermissions
@@ -84,7 +83,7 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
+    public function update(Request $request, Role $role)
     {
         $input = $request->only('name');
 
@@ -94,14 +93,14 @@ class RoleController extends Controller
 
         $role->syncPermissions($permissions);    
         
-        return redirect()->back()
+        return redirect()->route('roles.index')
                 ->withSuccess('Role is updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Role $role): RedirectResponse
+    public function destroy(Role $role)
     {
         if($role->name=='Super Admin'){
             abort(403, 'SUPER ADMIN ROLE CAN NOT BE DELETED');
@@ -113,4 +112,8 @@ class RoleController extends Controller
         return redirect()->route('roles.index')
                 ->withSuccess('Role is deleted successfully.');
     }
+
+
+
+
 }

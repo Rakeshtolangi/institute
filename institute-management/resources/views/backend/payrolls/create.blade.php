@@ -31,9 +31,11 @@
                                 <div class="col-md-4">
                                     <label for="designations_id">Select Role</label>
                                     <select name="designations_id" id="designations_id" class="form-control" required>
-                                        <option value="">-- Select Course --</option>
-                                        @foreach($designations as $designation)
-                                        <option value="{{ $designation->id }}">{{ $designation->name }}</option>
+                                        <option value="">-- Select Role --</option>
+                                        @foreach($roles as $role)
+                                        <option value="{{ $role->name}}"></option>
+                                       
+
                                         @endforeach
                                     </select>
                                 </div>

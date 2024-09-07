@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\payroll;
 use Illuminate\Http\Request;
-use App\Models\Role;
+use Spatie\Permission\Models\Role;
 use App\Models\Designation;
+use Spatie\Permission\Models\Permission;
+use DB;
 
 class PayrollController extends Controller
 {
@@ -22,8 +24,8 @@ class PayrollController extends Controller
 
     public function create()
     {
-        $designations = Designation::all();
-        return view('backend.payrolls.create', compact('designations'));
+        $roles = Role::all();
+        return view('backend.payrolls.create', compact('roles'));
     }
 
     public function store(Request $request)

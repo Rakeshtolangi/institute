@@ -39,7 +39,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::resource('students', StudentController::class);
 Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
-
+Route::post('/students/documents/{id}',[StudentController::class, 'uploadDocuments'])->name('students.uploadDocuments');
 Route::resource('teachers', TeacherController::class);
 Route::get('/teachers/{teacher}', [TeacherController::class, 'show'])->name('teachers.show');
 

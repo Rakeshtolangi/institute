@@ -42,6 +42,7 @@ class EnquiryController extends Controller
      */
     public function store(Request $request)
     {
+
        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'father_name' => 'required|string|max:255',
@@ -51,7 +52,7 @@ class EnquiryController extends Controller
             'preferred_time' => 'required|string|max:10',
             'course_id' => 'required',
         ]);
-
+        
         Enquiry::create($validated);
 
         return redirect()->route('enquiries.index')->with('success', 'Enquries added successfully!');

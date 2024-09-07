@@ -20,7 +20,7 @@
 
         ?>
 
-        @if (isset($id))
+        <!-- @if (isset($id))
         {!! Form::model($data, [
             'route' => ['location.index', $id],
             'method' => 'patch',
@@ -28,7 +28,7 @@
             ])!!}
 
         @else{ Form ::open (['location.store'], 'method'=>'post', 'enctype' => 'multipart/form-data') !! }
-        @endif
+        @endif -->
 
         <div class="row">
             <!-- Add Designation Form (40% width) -->

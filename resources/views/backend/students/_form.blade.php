@@ -46,10 +46,10 @@
     </div>
 
     <!-- docx upload section -->
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
         <label for="documents">Documents</label>
         <input type="file" name="doc_file" id="documents" class="form-control">
-    </div>
+    </div> -->
 
     <div class="col-md-6 mb-2">
         <label for="course_id">Course</label>

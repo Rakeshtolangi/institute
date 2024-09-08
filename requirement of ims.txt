@@ -1,10 +1,17 @@
 
 
+
+composer create-project laravel/laravel demo_auth
+cd demo_auth
+
             
 prob statements
 
 1. profile.blade.php access same file by teacher and student . edit garda problem.
 
+
+// show logs in the log fields
+    \Log::info($request->all()); // Log all form data for debugging
 
 
 
@@ -52,13 +59,13 @@ On Going > make the attachment file section on the teacher/student
 Done > remove the section master.
 Done >  add all the category to their respective category elements
 done> determined the fee category
-        make a proper visualized border
+make a proper visualized border
 change the icon in expenses table
-        remove all the dollar signs na make them nepali rupees
-        text should be visible (not gray)
-        Make id pannel system
-        add the teacher and students panel with all the respective roles to be added.
-        Add user
+remove all the dollar signs na make them nepali rupees
+text should be visible (not gray)
+Make id pannel system
+add the teacher and students panel with all the respective roles to be added.
+Add user
                 payroll section untouched. (after adding roles)
 
 
@@ -67,4 +74,8 @@ change the icon in expenses table
 prob aug 23
 feecategory edit not working.
 
+
+prob. sep 4
+create edit enquiry  data not save in db.
+ 
 

@@ -21,11 +21,15 @@
                     </div>
                     <div class="card-body">
 
-                        <form action="{{ route('students.update', $student->id) }}" method="POST">
+                        <form action="{{ route('students.update', $student->id) }}" method="POST"  enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row g-3">
-                                <div class="col-md-6">
+                            <div class="col-md-6">
+                                    <label for="admission_number">Admission No.</label>
+                                    <input type="text" name="admission_number" id="admission_number" class="form-control" value="{{$student->admission_number }}" readonly>
+                                </div>
+                                    <div class="col-md-6">
                                     <label for="name">Name</label>
                                     <input type="text" name="name" id="name" class="form-control"
                                         value="{{$student->name}}">
@@ -74,11 +78,6 @@
                                     <input type="file" name="image" id="image" class="form-control">
                                 </div>
 
-                                <!-- docx upload section -->
-                                <div class="col-md-6">
-                                    <label for="documents">Documents</label>
-                                    <input type="file" name="doc_file" id="documents" class="form-control">
-                                </div>
                                 <div class="col-md-6">
                                     <label for="course_id">Course</label>
                                     <select name="course_id" id="course_id" class="form-control">

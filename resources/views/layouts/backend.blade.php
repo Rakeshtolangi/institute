@@ -34,10 +34,34 @@
     <link rel="stylesheet" href="{{asset('assets/css/plugins.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/kaiadmin.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/customCss.css')}}" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
     .form-control {
         border-color: #d0d0d0e3 !important;
+    }
+
+    .sub-item::before {
+
+        font-family: 'FontAwesome';
+        content: "\f178" !important;
+        display: inline-block;
+        top: 0 !important;
+        background: none !important;
+
+
+    }
+
+    .sidebar .nav-collapse li a {
+        padding: 1px 25px !important;
+    }
+
+    .sidebar .nav-collapse,
+    .sidebar[data-background-color=white] .nav-collapse {
+        margin-top: 0;
+        margin-bottom: 5px;
+        padding-bottom: 5px;
+        padding-top: 0px;
+        padding-left: 40px !important;
     }
     </style>
 </head>
@@ -72,22 +96,13 @@
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
-                       
-                       
-                        @canany('Dashboard')
+
                         <li class="nav-item active">
                             <a href="{{route('home')}}" class="collapsed" aria-expanded="false">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                             </a>
 
-                        </li>
-                        @endcan
-                        <li class="nav-item">
-                            <!-- <a href="{{url('enquiries')}}">
-                                <i class=" fas fa-layer-group"></i>
-                                <p>Enquires</p>
-                            </a> -->
                         </li>
 
                         <li class="nav-item">
@@ -100,13 +115,11 @@
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="{{route('enquiries.index')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">List Enquires</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('enquiries.create')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">Add Enquires</span>
                                         </a>
                                     </li>
@@ -123,16 +136,14 @@
                             </a>
                             <div class="collapse" id="sidebarLayouts">
                                 <ul class="nav nav-collapse">
-                                    
+
                                     <li>
                                         <a href="{{route('students.index')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">List Students</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('students.create')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">Add Student</span>
                                         </a>
                                     </li>
@@ -149,13 +160,11 @@
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="{{route('batches.index')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">List Batches</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('shifts.index')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">List Shifts</span>
                                         </a>
                                     </li>
@@ -172,19 +181,16 @@
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="{{route('courses.index')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">List Courses</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('courses.create')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">Add Course</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('categories.index')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">Course Category</span>
                                         </a>
                                     </li>
@@ -201,13 +207,11 @@
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="{{route('teachers.index')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">List Teachers</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('teachers.create')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">Add Teacher</span>
                                         </a>
                                     </li>
@@ -234,7 +238,6 @@
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="{{route('payrolls.create')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">Payroll</span>
                                         </a>
                                     </li>
@@ -256,13 +259,11 @@
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="{{route('fees.index')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
-                                            <p>Fees</p>
+                                            <span class="sub-item">Fees</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('fees-categories.create')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
                                             <span class="sub-item">Fees Category</span>
                                         </a>
                                     </li>
@@ -282,14 +283,12 @@
                                 <ul class="nav nav-collapse">
                                     <li class="nav-item">
                                         <a href="{{route('expenses.index')}}">
-                                            <i class="fas fa-dollar-sign"></i>
-                                            <p>expenses</p>
+                                            <span class="sub-item">Expenses</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{route('expense-categories.index')}}">
-                                        <i class="fad fa-long-arrow-alt-right"></i>
-                                            <p>Expenses Category</p>
+                                            <span class="sub-item">Expense Category</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -300,83 +299,44 @@
                         <li class="nav-item">
                             <a href="{{route('designations.index')}}">
                                 <i class="fas fa-desktop"></i>
-                                <span class="sub-item">Designation</span>
+                                <span class="">Designation</span>
                             </a>
                         </li>
 
-
+                        <!-- Settings -->
                         <li class="nav-item">
-                            <a href="widgets.html">
-                                <i class="fas fa-desktop"></i>
-                                <p>Reports</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="widgets.html">
-                                <i class="fas fa-desktop"></i>
-                                <p>Widgets</p>
-                                <span class="badge badge-success">4</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../../documentation/index.html">
-                                <i class="fas fa-file"></i>
-                                <p>Documentation</p>
-                                <span class="badge badge-secondary">1</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#submenu">
-                                <i class="fas fa-bars"></i>
-                                <p>Menu Levels</p>
+                            <a data-bs-toggle="collapse" href="#sidebarLayoutsSetting">
+                                <i class="fas fa-gear"></i>
+                                <p>Settings</p>
                                 <span class="caret"></span>
                             </a>
-                            <div class="collapse" id="submenu">
+                            <div class="collapse" id="sidebarLayoutsSetting">
                                 <ul class="nav nav-collapse">
-                                    <li>
-                                        <a data-bs-toggle="collapse" href="#subnav1">
-                                            <span class="sub-item">Level 1</span>
-                                            <span class="caret"></span>
+                                    <li class="nav-item">
+                                        <a href="">
+                                            <span class="sub-item">System Settings</span>
                                         </a>
-                                        <div class="collapse" id="subnav1">
-                                            <ul class="nav nav-collapse subnav">
-                                                <li>
-                                                    <a href="#">
-                                                        <span class="sub-item">Level 2</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <span class="sub-item">Level 2</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </li>
-                                    <li>
-                                        <a data-bs-toggle="collapse" href="#subnav2">
-                                            <span class="sub-item">Level 1</span>
-                                            <span class="caret"></span>
+                                    <li class="nav-item">
+                                        <a href="{{route('users.index')}}">
+                                            <span class="sub-item">Users</span>
                                         </a>
-                                        <div class="collapse" id="subnav2">
-                                            <ul class="nav nav-collapse subnav">
-                                                <li>
-                                                    <a href="#">
-                                                        <span class="sub-item">Level 2</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="sub-item">Level 1</span>
+                                    <li class="nav-item">
+                                        <a href="{{route('roles.index')}}">
+                                            <span class="sub-item">Role</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                    <a href="{{route('permissions.index')}}">
+                                            <span class="sub-item">Permission</span>
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
+
+
                     </ul>
                 </div>
             </div>
@@ -409,100 +369,10 @@
                 <!-- Navbar Header -->
                 <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
                     <div class="container-fluid">
-                        <nav
-                            class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button type="submit" class="btn btn-search pe-1">
-                                        <i class="fa fa-search search-icon"></i>
-                                    </button>
-                                </div>
-                                <input type="text" placeholder="Search ..." class="form-control" />
-                            </div>
-                        </nav>
+                       
 
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
-                            <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                    aria-expanded="false" aria-haspopup="true">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-search animated fadeIn">
-                                    <form class="navbar-left navbar-form nav-search">
-                                        <div class="input-group">
-                                            <input type="text" placeholder="Search ..." class="form-control" />
-                                        </div>
-                                    </form>
-                                </ul>
-                            </li>
-                            <li class="nav-item topbar-icon dropdown hidden-caret">
-                                <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-envelope"></i>
-                                </a>
-                                <ul class="dropdown-menu messages-notif-box animated fadeIn"
-                                    aria-labelledby="messageDropdown">
-                                    <li>
-                                        <div class="dropdown-title d-flex justify-content-between align-items-center">
-                                            Messages
-                                            <a href="#" class="small">Mark all as read</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="message-notif-scroll scrollbar-outer">
-                                            <div class="notif-center">
-                                                <a href="#">
-                                                    <div class="notif-img">
-                                                        <img src="assets/img/jm_denis.jpg" alt="Img Profile" />
-                                                    </div>
-                                                    <div class="notif-content">
-                                                        <span class="subject">Jimmy Denis</span>
-                                                        <span class="block"> How are you ? </span>
-                                                        <span class="time">5 minutes ago</span>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="notif-img">
-                                                        <img src="assets/img/chadengle.jpg" alt="Img Profile" />
-                                                    </div>
-                                                    <div class="notif-content">
-                                                        <span class="subject">Chad</span>
-                                                        <span class="block"> Ok, Thanks ! </span>
-                                                        <span class="time">12 minutes ago</span>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="notif-img">
-                                                        <img src="assets/img/mlane.jpg" alt="Img Profile" />
-                                                    </div>
-                                                    <div class="notif-content">
-                                                        <span class="subject">Jhon Doe</span>
-                                                        <span class="block">
-                                                            Ready for the meeting today...
-                                                        </span>
-                                                        <span class="time">12 minutes ago</span>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="notif-img">
-                                                        <img src="assets/img/talha.jpg" alt="Img Profile" />
-                                                    </div>
-                                                    <div class="notif-content">
-                                                        <span class="subject">Talha</span>
-                                                        <span class="block"> Hi, Apa Kabar ? </span>
-                                                        <span class="time">17 minutes ago</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="see-all" href="javascript:void(0);">See all messages<i
-                                                class="fa fa-angle-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                     
                             <li class="nav-item topbar-icon dropdown hidden-caret">
                                 <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -580,52 +450,52 @@
                                     <div class="quick-actions-scroll scrollbar-outer">
                                         <div class="quick-actions-items">
                                             <div class="row m-0">
-                                                <a class="col-6 col-md-4 p-0" href="#">
+                                                <a class="col-6 col-md-4 p-0" href="{{route('enquiries.index')}}">
                                                     <div class="quick-actions-item">
                                                         <div class="avatar-item bg-danger rounded-circle">
-                                                            <i class="far fa-calendar-alt"></i>
+                                                            <i class="far fa-lightbulb"></i>
                                                         </div>
-                                                        <span class="text">Calendar</span>
+                                                        <span class="text">Add Enquries</span>
                                                     </div>
                                                 </a>
-                                                <a class="col-6 col-md-4 p-0" href="#">
+                                                <a class="col-6 col-md-4 p-0" href="{{route('students.index')}}">
                                                     <div class="quick-actions-item">
                                                         <div class="avatar-item bg-warning rounded-circle">
-                                                            <i class="fas fa-map"></i>
+                                                            <i class="fas fa-users"></i>
                                                         </div>
-                                                        <span class="text">Maps</span>
+                                                        <span class="text">Add Students</span>
                                                     </div>
                                                 </a>
-                                                <a class="col-6 col-md-4 p-0" href="#">
+                                                <a class="col-6 col-md-4 p-0" href="{{route('batches.index')}}">
                                                     <div class="quick-actions-item">
                                                         <div class="avatar-item bg-info rounded-circle">
-                                                            <i class="fas fa-file-excel"></i>
+                                                            <i class="fas fa-book-open"></i>
                                                         </div>
-                                                        <span class="text">Reports</span>
+                                                        <span class="text">Add Batch</span>
                                                     </div>
                                                 </a>
-                                                <a class="col-6 col-md-4 p-0" href="#">
+                                                <a class="col-6 col-md-4 p-0" href="{{route('courses.index')}}">
                                                     <div class="quick-actions-item">
                                                         <div class="avatar-item bg-success rounded-circle">
-                                                            <i class="fas fa-envelope"></i>
+                                                            <i class="fas fa-graduation-cap"></i>
                                                         </div>
-                                                        <span class="text">Emails</span>
+                                                        <span class="text">Add Course</span>
                                                     </div>
                                                 </a>
-                                                <a class="col-6 col-md-4 p-0" href="#">
+                                                <a class="col-6 col-md-4 p-0" href="{{route('payrolls.index')}}">
                                                     <div class="quick-actions-item">
                                                         <div class="avatar-item bg-primary rounded-circle">
-                                                            <i class="fas fa-file-invoice-dollar"></i>
+                                                            <i class="fas fa-sitemap"></i>
                                                         </div>
-                                                        <span class="text">Invoice</span>
+                                                        <span class="text">Payroll</span>
                                                     </div>
                                                 </a>
-                                                <a class="col-6 col-md-4 p-0" href="#">
+                                                <a class="col-6 col-md-4 p-0" href="{{route('fees.index')}}">
                                                     <div class="quick-actions-item">
                                                         <div class="avatar-item bg-secondary rounded-circle">
-                                                            <i class="fas fa-credit-card"></i>
+                                                            <i class="fas fa-rupee-sign"></i>
                                                         </div>
-                                                        <span class="text">Payments</span>
+                                                        <span class="text">Collect Fee</span>
                                                     </div>
                                                 </a>
                                             </div>
@@ -641,8 +511,7 @@
                                         <img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle" />
                                     </div>
                                     <span class="profile-username">
-                                        <span class="op-7">Hi,</span>
-                                        <span class="fw-bold">Hizrian</span>
+                                        <span class="fw-bold">{{ Auth::user()->name }}</span>
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -654,8 +523,8 @@
                                                         class="avatar-img rounded" />
                                                 </div>
                                                 <div class="u-text">
-                                                    <h4>Hizrian</h4>
-                                                    <p class="text-muted">hello@example.com</p>
+                                                    <h4>{{ Auth::user()->name }}</h4>
+                                                    <p class="text-muted">{{ Auth::user()->roles->pluck('name') }}</p>
                                                     <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
                                                         Profile</a>
                                                 </div>
@@ -694,26 +563,18 @@
                     <nav class="pull-left">
                         <ul class="nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="http://www.themekita.com">
-                                    ThemeKita
+                                <a class="nav-link" href="{{url('/')}}">
+                                © 2024 IMS | All Rigth Reserved. 
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"> Help </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"> Licenses </a>
-                            </li>
+                        
                         </ul>
                     </nav>
                     <div class="copyright">
-                        2024, made with <i class="fa fa-heart heart text-danger"></i> by
-                        <a href="http://www.themekita.com">ThemeKita</a>
+                         Designed & Developed By
+                        <a href="http://creativecanvas.info" target="_blank">CC Group Of Comapny Pvt. Ltd.</a>
                     </div>
-                    <div>
-                        Distributed by
-                        <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
-                    </div>
+                    
                 </div>
             </footer>
         </div>
@@ -789,6 +650,158 @@
         });
     });
     </script>
+<!-- <script>
+    (function ($) {
+  $.fn.uploader = function (options) {
+    var settings = $.extend(
+      {
+        MessageAreaText: "No files selected.",
+        MessageAreaTextWithFiles: "File List:",
+        DefaultErrorMessage: "Unable to open this file.",
+        BadTypeErrorMessage: "We cannot accept this file type at this time.",
+        acceptedFileTypes: [
+          "pdf"
+        ]
+      },
+      options
+    );
+
+    var uploadId = 1;
+    //update the messaging
+    $(".file-uploader__message-area p").text(
+      options.MessageAreaText || settings.MessageAreaText
+    );
+
+    //create and add the file list and the hidden input list
+    var fileList = $('<ul class="file-list"></ul>');
+    var hiddenInputs = $('<div class="hidden-inputs hidden"></div>');
+    $(".file-uploader__message-area").after(fileList);
+    $(".file-list").after(hiddenInputs);
+
+    //when choosing a file, add the name to the list and copy the file input into the hidden inputs
+    $(".file-chooser__input").on("change", function () {
+      var files = document.querySelector(".file-chooser__input").files;
+
+      for (var i = 0; i < files.length; i++) {
+        console.log(files[i]);
+
+        var file = files[i];
+        var fileName = file.name.match(/([^\\\/]+)$/)[0];
+
+        //clear any error condition
+        $(".file-chooser").removeClass("error");
+        $(".error-message").remove();
+
+        //validate the file
+        var check = checkFile(fileName);
+        if (check === "valid") {
+          // move the 'real' one to hidden list
+          $(".hidden-inputs").append($(".file-chooser__input"));
+
+          //insert a clone after the hiddens (copy the event handlers too)
+          $(".file-chooser").append(
+            $(".file-chooser__input").clone({ withDataAndEvents: true })
+          );
+
+          //add the name and a remove button to the file-list
+          $(".file-list").append(
+            '<li style="display: none;"><span class="file-list__name">' +
+              fileName +
+              '</span><button class="removal-button" data-uploadid="' +
+              uploadId +
+              '"></button></li>'
+          );
+          $(".file-list").find("li:last").show(800);
+
+          //removal button handler
+          $(".removal-button").on("click", function (e) {
+            e.preventDefault();
+
+            //remove the corresponding hidden input
+            $(
+              '.hidden-inputs input[data-uploadid="' +
+                $(this).data("uploadid") +
+                '"]'
+            ).remove();
+
+            //remove the name from file-list that corresponds to the button clicked
+            $(this)
+              .parent()
+              .hide("puff")
+              .delay(10)
+              .queue(function () {
+                $(this).remove();
+              });
+
+            //if the list is now empty, change the text back
+            if ($(".file-list li").length === 0) {
+              $(".file-uploader__message-area").text(
+                options.MessageAreaText || settings.MessageAreaText
+              );
+            }
+          });
+
+          //so the event handler works on the new "real" one
+          $(".hidden-inputs .file-chooser__input")
+            .removeClass("file-chooser__input")
+            .attr("data-uploadId", uploadId);
+
+          //update the message area
+          $(".file-uploader__message-area").text(
+            options.MessageAreaTextWithFiles ||
+              settings.MessageAreaTextWithFiles
+          );
+
+          uploadId++;
+        } else {
+          //indicate that the file is not ok
+          $(".file-chooser").addClass("error");
+          var errorText =
+            options.DefaultErrorMessage || settings.DefaultErrorMessage;
+
+          if (check === "badFileName") {
+            errorText =
+              options.BadTypeErrorMessage || settings.BadTypeErrorMessage;
+          }
+
+          $(".file-chooser__input").after(
+            '<p class="error-message">' + errorText + "</p>"
+          );
+        }
+      }
+    });
+
+    var checkFile = function (fileName) {
+      var accepted = "invalid",
+        acceptedFileTypes =
+          this.acceptedFileTypes || settings.acceptedFileTypes,
+        regex;
+
+      for (var i = 0; i < acceptedFileTypes.length; i++) {
+        regex = new RegExp("\\." + acceptedFileTypes[i] + "$", "i");
+
+        if (regex.test(fileName)) {
+          accepted = "valid";
+          break;
+        } else {
+          accepted = "badFileName";
+        }
+      }
+
+      return accepted;
+    };
+  };
+})($);
+
+//init
+$(document).ready(function () {
+  console.log("hi");
+  $(".fileUploader").uploader({
+    MessageAreaText: "No files selected. Please select a file."
+  });
+});
+
+</script> -->
 </body>
 
 </html>

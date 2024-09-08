@@ -53,4 +53,11 @@
             @endforeach
         </select>
     </div>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label for="preferred_time">Preferred Time</label>
+            <input type="time" name="Prefered_time" class="form-control" value="{{ old('spreferred_time', $time->preferred_time ?? '') }}"
+        required>
+        </div>
+    </div>
 </div>

@@ -53,6 +53,7 @@ class StudentController extends Controller
 
 public function store(Request $request)
 {
+            // dd($request->all());
     $validated = $request->validate([    
         'admission_number' => 'required',
         'name' => 'required|string|max:255',
@@ -64,7 +65,6 @@ public function store(Request $request)
         'course_id' => 'required',
         'batch_id' => 'required',
         'image' => 'nullable|image|max:2048',  
-        // 'doc_file' => 'required|file|max:2048',
         
         // Assuming file type
         'course_fee' => 'required',
@@ -76,15 +76,9 @@ public function store(Request $request)
         $imageFileName = time() . '_' . uniqid() . '.' . $request->image->extension();  
         $request->image->move(public_path('uploads/students'), $imageFileName);
         $validated['image'] = 'uploads/students/' . $imageFileName;
+
     }
 
-    // Handle document upload if provided
-    // if ($request->hasFile('doc_file')) {
-    //     $docFileName = time() . '_' . uniqid() . '.' . $request->doc_file->extension();  
-    //     $request->doc_file->move(public_path('uploads/students/documents'), $docFileName);
-    //     $validated['doc_file'] = 'uploads/students/documents/' . $docFileName;
-    // }
-    
     Student::create($validated);
 
     return redirect()->route('students.index')->with('success', 'Student added successfully!');
@@ -114,8 +108,7 @@ public function store(Request $request)
     {
     
         // dd($request->all());
-        $validated = $request->validate([
-            //adding this to check if data is being received correctly
+        $validated = $request->validate([    
             'admission_number' => 'required',
             'name' => 'required|string|max:255',
             'father_name' => 'required|string|max:255',
@@ -124,31 +117,58 @@ public function store(Request $request)
             'mobile' => 'required|string|max:15',
             'gender' => 'required|in:male,female',
             'course_id' => 'required',
-            'image' => 'nullable',  
-            'doc_file' => 'nullable|file|mimes:jpg,png,pdf|max:2048',  
             'batch_id' => 'required',
+            'image' => 'nullable|image|max:2048',  
+            
+            // Assuming file type
             'course_fee' => 'required',
             'student_fee' => 'required',
-        ]);
+        ]); 
+    
+        // dd($validated);
+
 
         // Handle file upload if an image is provided
         if ($request->hasFile('image')) {
-            $fileName = time().'.'.$request->image->extension();  
-            $request->image->move(public_path('uploads/students/profile'), $fileName);
-            $validated['image'] = 'uploads/students/profile/' . $fileName;
+            $imageFileName = time() . '_' . uniqid() . '.' . $request->image->extension();  
+            $request->image->move(public_path('uploads/students'), $imageFileName);
+            $validated['image'] = 'uploads/students/' . $imageFileName;
+    
         }
-
-
-         // Handle Documents upload if an image is provided
-         if ($request->hasFile('doc_file')) {
-            $docName = $request->doc_file->extension();  
-            $request->doc_file->move(public_path('uploads/students/documents'), $docName);
-            $validated['doc_file'] = 'uploads/students/documents/' . $docName;
-        }
-        
+     
+        // dd($validated);
         $student->update($validated);
 
         return redirect()->route('students.index')->with('success', 'Student updated successfully!');
+    }
+
+    
+    public function uploadDocuments(Request $request)
+    {
+
+        // dd($request->all());
+        $student = Student::findOrFail($request->id);
+    
+        if($request->hasFile('files')) {
+            $files = $request->file('files');
+
+            foreach ($files as $key => $file) {
+                if($file->isValid()) {
+                    $destinationPath = public_path('uploads/students/documents');
+                    $extension = $file->getClientOriginalExtension();
+                    $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                    $fileName = $originalName . '-' . uniqid() . '.' . $extension;
+                    $file->move($destinationPath, $fileName);
+                    $student['documents'] = $fileName;
+                }
+
+                // dd($student);
+                $student->save();
+            }
+
+            return redirect()->back()->with('success','File uploaded.');
+        }
+        return redirect()->back();
     }
 
     public function destroy(Student $student)

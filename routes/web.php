@@ -18,8 +18,8 @@ use App\Http\Controllers\FeesController;
 use App\Http\Controllers\FeesCategoryController;
 
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
-
 
 Auth::routes();
 
@@ -28,16 +28,18 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 
 Route::group(['middleware' => ['auth']], function() {
-  
-  
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+
 
 
 
 Route::resource('students', StudentController::class);
 Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
-
+Route::post('/students/documents/{id}',[StudentController::class, 'uploadDocuments'])->name('students.uploadDocuments');
 Route::resource('teachers', TeacherController::class);
 Route::get('/teachers/{teacher}', [TeacherController::class, 'show'])->name('teachers.show');
 
@@ -66,6 +68,9 @@ Route::post('/attendance', [AttandanceController::class, 'store'])->name('attend
 Route::get('/attendance/report', [AttandanceController::class, 'report'])->name('attendance.report');
 
 Route::get('/reports/fee', [StudentController::class, 'feeReport'])->name('reports.fee');
+
+Route::resource('roles', RoleController::class);
+Route::resource('permissions', PermissionController::class);
 
 });
 Auth::routes();

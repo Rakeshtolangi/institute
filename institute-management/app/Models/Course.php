@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Course extends Model
 {
@@ -51,4 +52,31 @@ class Course extends Model
     {
         return $this->hasMany(Batch::class);
     }
+
+
+    public function isCompleted($student)
+    {
+        $enrollmentDate = Carbon::parse($student->created_at);
+        $currentDate = Carbon::now();
+        $expectedCompletionDate = $this->calculateCompletionDate($enrollmentDate);
+
+        return $currentDate->greaterThanOrEqualTo($expectedCompletionDate);
+    }
+
+    private function calculateCompletionDate($enrollmentDate)
+    {
+        switch ($this->type) {
+            case 'days':
+                return $enrollmentDate->addDays((int) $this->duration);
+            case 'weeks':
+                return $enrollmentDate->addWeeks((int) $this->duration);
+            case 'months':
+                return $enrollmentDate->addMonths((int) $this->duration);
+            default:
+                throw new \Exception("Invalid duration type");
+        }
+    }
+
+
+
 }

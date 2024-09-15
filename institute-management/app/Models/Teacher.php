@@ -10,10 +10,11 @@ class Teacher extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'name',
         'father_name',
         'email',
-        'password',
+        // 'password',
         'phone',
         'gender',
         'dob',
@@ -47,5 +48,10 @@ class Teacher extends Model
     public function designation()
     {
         return $this->belongsTo(Designation::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

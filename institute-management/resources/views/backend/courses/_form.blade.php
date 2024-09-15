@@ -32,6 +32,9 @@
             <option value="days">
                 Days
             </option>
+            <option value="weeks">
+                Weeks
+            </option>
             <option value="months">
                 Months
             </option>

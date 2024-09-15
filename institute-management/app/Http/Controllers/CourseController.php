@@ -93,6 +93,8 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
+
+        // dd($request->all());
         // Validate the request
         $validated = $request->validate([
             'title' => 'required|string|max:255',

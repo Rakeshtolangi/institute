@@ -49,7 +49,7 @@ class UserController extends Controller
     {
         $input = $request->all();
         $input['password'] = Hash::make($request->password);
-
+        $input['role_id'] = $request->role_id;
         $user = User::create($input);
         $user->assignRole($request->roles);
 
@@ -96,7 +96,8 @@ class UserController extends Controller
         }else{
             $input = $request->except('password');
         }
-        
+        $input['role_id'] = $request->role_id;
+
         $user->update($input);
 
         $user->syncRoles($request->roles);

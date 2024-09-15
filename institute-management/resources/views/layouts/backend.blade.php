@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <meta charset=UTF-8>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Institue </title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
@@ -28,6 +30,8 @@
         },
     });
     </script>
+
+
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" />
@@ -147,6 +151,11 @@
                                             <span class="sub-item">Add Student</span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{{route('certificates.student.list')}}">
+                                            <span class="sub-item">Certificates</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -237,7 +246,7 @@
                             <div class="collapse" id="sidebarLayoutsHRM">
                                 <ul class="nav nav-collapse">
                                     <li>
-                                        <a href="{{route('payrolls.create')}}">
+                                        <a href="{{route('payrolls.index')}}">
                                             <span class="sub-item">Payroll</span>
                                         </a>
                                     </li>
@@ -318,6 +327,11 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="{{route('certificates.index')}}">
+                                            <span class="sub-item">Cetificate Templates</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="{{route('users.index')}}">
                                             <span class="sub-item">Users</span>
                                         </a>
@@ -367,7 +381,7 @@
                     <!-- End Logo Header -->
                 </div>
                 <!-- Navbar Header -->
-                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
                     <div class="container-fluid">
                        
 
@@ -525,18 +539,14 @@
                                                 <div class="u-text">
                                                     <h4>{{ Auth::user()->name }}</h4>
                                                     <p class="text-muted">{{ Auth::user()->roles->pluck('name') }}</p>
-                                                    <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
-                                                        Profile</a>
+                                                   
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">My Profile</a>
-                                            <a class="dropdown-item" href="#">My Balance</a>
-                                            <a class="dropdown-item" href="#">Inbox</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Account Setting</a>
+                                         
                                             <div class="dropdown-divider"></div>
 
                                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -614,34 +624,31 @@
     <!-- Kaiadmin JS -->
     <script src="{{asset('assets/js/kaiadmin.min.js')}}"></script>
 
+
+    <script src="https://cdn.tiny.cloud/1/7wd2m5v2a2lpqszixi9ckr6gcg4lag8bbkzbevi88mbzcu4w/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
     <script>
-    $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#177dff",
-        fillColor: "rgba(23, 125, 255, 0.14)",
+    tinymce.init({
+      selector: 'textarea',
+      plugins: [
+        // Core editing features
+        'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+        // Your account includes a free trial of TinyMCE premium features
+        // Try the most popular premium features until Sep 26, 2024:
+        'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
+      ],
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+      mergetags_list: [
+        { value: 'First.Name', title: 'First Name' },
+        { value: 'Email', title: 'Email' },
+      ],
+      ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
     });
+  </script>
 
-    $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#f3545d",
-        fillColor: "rgba(243, 84, 93, .14)",
-    });
 
-    $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#ffa534",
-        fillColor: "rgba(255, 165, 52, .14)",
-    });
-    </script>
 
     <script>
     $(document).ready(function() {

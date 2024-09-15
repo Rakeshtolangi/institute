@@ -11,7 +11,8 @@ use App\Models\Designation;
 use App\Models\Batch;
 use App\Models\Student;
 use App\Models\Category;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 class TeacherController extends Controller
 {
 
@@ -42,50 +43,73 @@ class TeacherController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'father_name' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:teachers,email',
-            'password' => 'nullable',
-            'phone' => 'required|string|max:20',
-            'gender' => 'nullable|string|in:male,female',
-            'dob' => 'nullable|date',
-            'image' => 'nullable|image|max:2048',
-            // 'doc_file' => 'required|file|mimes:pdf|max:2048',
-            'doc_file' => 'nullable|image|max:2048',
-
-            'address' => 'nullable|string',
-            'course_id' => 'required',
-            'batch_id' => 'required',
-            'qualification' => 'nullable|string',
-            'experience' => 'nullable|integer',
-            'date_of_join' => 'nullable|date',
-            'designation_id' => 'nullable',
-        ]);
-
-
-       // Handle file upload if an image is provided
-        if ($request->hasFile('image')) {
-        $fileName = time().'.'.$request->image->extension();  
-        $request->image->move(public_path('uploads/teachers/profile'), $fileName);
-        $validated['image'] = 'uploads/teachers/profile/' . $fileName;
-    }
+        // $validatedData = $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'father_name' => 'nullable|string|max:255',
+        //     'email' => 'required|email|unique:users,email',
+        //     'password' => 'nullable|string|min:8', // Ensure password is provided or make it required
+        //     'phone' => 'required|string|max:20',
+        //     'gender' => 'nullable|string|in:male,female',
+        //     'dob' => 'nullable|date',
+        //     'image' => 'nullable|image|max:2048',
+        //     'doc_file' => 'nullable|file|mimes:pdf|max:2048',
+        //     'address' => 'nullable|string',
+        //     'course_id' => 'required|exists:courses,id', // Ensure course_id exists
+        //     'batch_id' => 'required|exists:batches,id', // Ensure batch_id exists
+        //     'qualification' => 'nullable|string',
+        //     'experience' => 'nullable|integer',
+        //     'date_of_join' => 'nullable|date',
+        //     'designation_id' => 'nullable|exists:designations,id', // Ensure designation_id exists
+        // ]);
     
-//   dd($validated);
-
-      // Handle Documents upload if an image is provided
-      if ($request->hasFile('doc_file')) {
-        $docFile = time().'.'.$request->doc_file->extension();  
-        $request->doc_file->move(public_path('uploads/teachers/documents'), $docFile);
-        $validated['doc_file'] = 'uploads/teachers/documents/' . $docFile;
-        }   
-        
-      
-        
-        Teacher::create($request->all());
+        // Handle file upload if an image is provided
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $fileName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('uploads/teachers/profile'), $fileName);
+            $imagePath = 'uploads/teachers/profile/' . $fileName;
+        }
+    
+        // Handle Documents upload if a file is provided
+        $docFilePath = null;
+        if ($request->hasFile('doc_file')) {
+            $docFile = time().'.'.$request->doc_file->extension();  
+            $request->doc_file->move(public_path('uploads/teachers/documents'), $docFile);
+            $docFilePath = 'uploads/teachers/documents/' . $docFile;
+        }
+    
+        // Insert into users table
+        $user = User::create([
+            'name' => $request->name,
+            'email' =>  $request->email,
+            'password' => $request->password ? Hash::make($request->password) : null, 
+            'role_id' => 17, 
+        ]);
+    
+        // dd($user);
+        // Insert into teachers table
+        Teacher::create([
+            'user_id' => $user->id,
+            'name' => $request->name,
+            'father_name' => $request->father_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'gender' => $request->gender,
+            'dob' => $request->dob,
+            'address' => $request->address,
+            'course_id' => $request->course_id,
+            'batch_id' => $request->batch_id,
+            'qualification' => $request->qualification,
+            'experience' => $request->experience,
+            'date_of_join' => $request->date_of_join,
+            'designation_id' => $request->designation_id,
+            'image' => $imagePath,
+            'doc_file' => $docFilePath,
+        ]);
+    
         return redirect()->route('teachers.index')->with('success', 'Teacher added successfully');
     }
+    
 
     // public function show(Teacher $teacher)
     // {

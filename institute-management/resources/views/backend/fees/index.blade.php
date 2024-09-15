@@ -53,6 +53,7 @@
                         </div>
                       
                         <div class="card-body">
+                            <div class="table-responsive">
                             <table class="datatables table table-striped" id="fees-table">
                                 <thead>
                                     <tr>
@@ -61,9 +62,9 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Mobile</th>
-                                        <th>Paid Amount</th>
+                                        {{-- <th>Paid Amount</th>
                                         <th>Due_amount</th>
-                                        <th>Status</th>
+                                        <th>Status</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -72,7 +73,7 @@
                                     @foreach($students as $key => $student)
                                     <tr>
                                         <td>{{$key + 1 }}</td>
-                                        <td>aa</td>
+                                        <td>{{$student->admission_number}}</td>
                                         <td>
                                         <a href="{{ route('students.show', $student->id) }}">
                                             {{ $student->name }}
@@ -80,9 +81,7 @@
                                         </td>
                                         <td>{{ $student->email }}</td>
                                         <td>{{ $student->mobile }}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        
                                         <td>
                                             <div class="btn-group dropstart">
                                                 <button type="button" class="btn dropdown-toggle"
@@ -97,7 +96,7 @@
                                                     <a href="{{ route('fees.addpayment', $student->id) }}"
                                                     class="dropdown-item">Add Payment</a>
                                                 
-                                                        <a href=""
+                                                        <a href="{{ route('fees.list', $student->id) }}"
                                                             class="dropdown-item">view Payment</a>
 
                                                         <form action="{{ route('students.destroy', $student->id) }}"
@@ -117,6 +116,7 @@
 
                                 </tbody>
                             </table>
+                        </div>
                             <input type="hidden" name="course_id" id="" value="{{$selectedCourse}}">
                             <input type="hidden" name="batch_id" id="" value="{{$selectedBatch}}">
                         </div>

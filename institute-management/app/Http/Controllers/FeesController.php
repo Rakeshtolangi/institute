@@ -143,10 +143,20 @@ public function storePayment($id){
     /**
      * Display the specified resource.
      */
-    public function show(Fee $fee)
+    public function feeList($studentId)
     {
-        // return view('backend.fees.show', compact('fee'));
+        $fees = Fee::where('student_id', $studentId)->get();
+        $student = Student::findOrFail($studentId);
+
+        return view('backend.fees.show', compact('fees','student'));
     }
+
+    public function show()
+    {
+
+    }
+
+    
 
     /**
      * Show the form for editing the specified resource.

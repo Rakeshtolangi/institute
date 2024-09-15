@@ -16,6 +16,7 @@ use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\FeesController;
 use App\Http\Controllers\FeesCategoryController;
+use App\Http\Controllers\CertificateController;
 
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
@@ -24,14 +25,25 @@ use App\Http\Controllers\UserController;
 Auth::routes();
 
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('frontend');
+
+
+
+
+
+
+Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
 
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    // Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
 
 
@@ -54,12 +66,23 @@ Route::resource('designations', DesignationController::class);
 
 Route::resource('expense-categories',ExpenseCategoryController::class);
 Route::resource('payrolls', PayrollController::class);
+Route::get('payrolls/form', [PayrollController::class, 'payrollForm'])->name('payrolls.form');
+route::get('/payrolls/user/{userId}', [PayrollController::class, 'payrollList'])->name('payrolls.list');
+
+
 Route::resource('fees', FeesController::class);
 Route::resource('fees-categories', FeesCategoryController::class);
 
 Route::get('fees/student/add-payment/{id}',[FeesController::class, 'addPayment'])->name('fees.addpayment');
 Route::get('fees/student/store-payment/{id}',[FeesController::class, 'storePayment'])->name('fees.storePayment');
 // Make a custom route for students
+route::get('/fees/student/{studentId}', [FeesController::class, 'feeList'])->name('fees.list');
+
+// Certificate routes
+Route::resource('certificates', CertificateController::class);
+Route::get('/certificates/generate/{id}', [CertificateController::class, 'generateCertificate'])->name('certificates.generate');
+Route::get('/certificates/student/list', [CertificateController::class, 'studentList'])->name('certificates.student.list');
+Route::post('/certificates/generate/multiple', [CertificateController::class, 'generateMultiple'])->name('certificates.generateMultiple');
 
 
 // custom routes are here

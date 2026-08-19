@@ -1,0 +1,81 @@
+
+
+
+composer create-project laravel/laravel demo_auth
+cd demo_auth
+
+            
+prob statements
+
+1. profile.blade.php access same file by teacher and student . edit garda problem.
+
+
+// show logs in the log fields
+    \Log::info($request->all()); // Log all form data for debugging
+
+
+
+ //To show time format in 12 hrs 
+<td>
+    {{ \Carbon\Carbon::parse($enquiry->preferred_time)->format('h:i A') }}
+</td>  
+
+
+sat, Aug, 10 requirements
+- Course Category (CURD)                
+               - done
+
+- Admission form                                     
+- Attandance (Teacher & Student)          
+            - attandance model/controller/ view is ready. database and migration needed.
+            - select date of attendance 
+
+- Follow up / Record (Hold)
+- cetrificate
+- Payroll
+        - designation CURD
+        - 
+
+-Expense (CURD/ Category-CURD)
+        -ExpenseController
+        -Expense   model
+        - expenses migrations but need to make table/migrate
+-Report       
+        create module on studentContorller/ view (fee_report)    
+        php artisan make:migration add_fee_columns_to_students_table --table=students
+
+- Aug, 13 2024 requirements
+    -Add all teacher input fields
+
+- Aug, 20 2024 requirements
+    - Redo
+    - Fee CURD
+    - Std Admission random number
+
+
+
+1st draft requirements. (aug 21)
+On Going > make the attachment file section on the teacher/student
+Done > remove the section master.
+Done >  add all the category to their respective category elements
+done> determined the fee category
+make a proper visualized border
+change the icon in expenses table
+remove all the dollar signs na make them nepali rupees
+text should be visible (not gray)
+Make id pannel system
+add the teacher and students panel with all the respective roles to be added.
+Add user
+                payroll section untouched. (after adding roles)
+
+
+
+
+prob aug 23
+feecategory edit not working.
+
+
+prob. sep 4
+create edit enquiry  data not save in db.
+ 
+

@@ -11,7 +11,7 @@ use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\DesignationController;
-use App\Http\Controllers\AttandanceController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\FeesController;
@@ -36,15 +36,16 @@ Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name
 
 
 
-Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin', function () {
+    return redirect()->route('admin.dashboard');
+})->name('home');
 
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
 
-    // Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-
+    Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.dashboard');
 
 
 
@@ -86,9 +87,9 @@ Route::post('/certificates/generate/multiple', [CertificateController::class, 'g
 
 
 // custom routes are here
-Route::get('/attendance', [AttandanceController::class, 'index'])->name('attendance.index');
-Route::post('/attendance', [AttandanceController::class, 'store'])->name('attendance.store');
-Route::get('/attendance/report', [AttandanceController::class, 'report'])->name('attendance.report');
+Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
+Route::post('/attendance', [AttendanceController::class, 'store'])->name('attendance.store');
+Route::get('/attendance/report', [AttendanceController::class, 'report'])->name('attendance.report');
 
 Route::get('/reports/fee', [StudentController::class, 'feeReport'])->name('reports.fee');
 
